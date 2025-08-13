@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results | Genkada Automobile</title>
+  <link rel="stylesheet" href="styles/search.css" />
+  <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+</head>
+<body>
+   <button class="back-btn" onclick="history.back()">
+      <span class="arrow-icon">←</span> Go Back
+    </button>
+  <h1 style="text-align:center;">Search Results</h1>
+  <div id="searchResults" class="search-results-grid"></div>
+
+  <!-- Load car & service data -->
+  <script src="script/carsales.js"></script>
+  <script src="script/services.js"></script>
+
+<!-- Filtering logic -->
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const query = (params.get("query") || params.get("search") || "").toLowerCase().trim();
+
+  const container = document.getElementById('searchResults');
+  let matchFound = false;
+
+  function highlight(text, keyword) {
+    if (!keyword) return text;
+    const re = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(re, '<mark>$1</mark>');
+  }
+
+  if (!query) {
+    container.innerHTML = "<p style='text-align:center; color:#888;'>No search query provided.</p>";
+  } else {
+    container.innerHTML = "<p style='text-align:center; color:#666;'>Searching...</p>";
+
+    fetch(`search_cars.php?query=${encodeURIComponent(query)}`)
+      .then(res => res.json())
+      .then(cars => {
+        container.innerHTML = "";
+        if (!Array.isArray(cars) || cars.length === 0) {
+          container.innerHTML = `
+            <div class="no-result">
+              <p>No results found for "<strong>${query}</strong>"</p>
+              <button onclick="window.location.href='index.html'">Return Home</button>
+            </div>
+          `;
+          return;
+        }
+
+        cars.forEach(car => {
+          matchFound = true;
+          const card = document.createElement('div');
+          card.className = 'result-card';
+          card.innerHTML = `
+            <img src="${car.image}" alt="${car.name}" />
+            <h3>${highlight(car.name, query)}</h3>
+            <p>${highlight(car.description, query)}</p>
+            <span class="price">${car.price}</span>
+            <button class="details-btn" data-id="${car.id}">View Car Details</button>
+            <a href="inspection.html?name=${encodeURIComponent(car.name)}&price=${encodeURIComponent(car.price)}&model=${encodeURIComponent(car.model)}&img=${encodeURIComponent(car.image)}">Book Inspection</a>
+          `;
+          container.appendChild(card);
+        });
+
+        // Attach details button click handlers
+        container.querySelectorAll(".details-btn").forEach(btn => {
+          btn.addEventListener("click", e => {
+            const carId = e.currentTarget.getAttribute("data-id");
+            // Pass the car id in URL, or use localStorage if you want more data
+            window.location.href = `car-details.html?id=${carId}`;
+          });
+        });
+      })
+      .catch(err => {
+        container.innerHTML = "<p style='color:red; text-align:center;'>Failed to load search results. Please try again later.</p>";
+        console.error("Search error:", err);
+      });
+  }
+</script>
+</body>
+</html>

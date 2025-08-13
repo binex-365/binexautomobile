@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Car Inspection - Genkada Automobile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+  <style>
+    :root {
+      --highlight: #00ffd0;
+      --glow: rgba(0, 255, 208, 0.3);
+      --background1: #000d1a;
+      --background2: #001d3d;
+      --background3: #002b5e;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(0, 255, 200, 0.1), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0, 128, 255, 0.1), transparent 60%),
+        linear-gradient(135deg, var(--background1), var(--background2), var(--background3));
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 40px 20px;
+      color: #ffffff;
+    }
+
+    header {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0px 20px;
+      position: relative;
+      z-index: 1000;
+    }
+
+
+    .inspection-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(145deg, #001f3f, #003366);
+      padding: 15px 25px;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 204, 255, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      margin-bottom: 4rem;
+      overflow: hidden;
+    }
+
+    .header-left button {
+      background: #004080;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      font-weight: bold;
+      border-radius: 6px;
+      box-shadow: 0 0 8px #00ccff;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s;
+    }
+
+    .header-left button:hover {
+      background: #0066cc;
+    }
+
+    .genkada-logo {
+      width: min(250px, 60vw); /* Max 250px, but scales down for small screens */
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      margin-top: 1.3rem;
+    }
+
+    .verified-badge {
+      font-size: 14px;
+      background: rgba(0, 255, 170, 0.1);
+      padding: 6px 12px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #00ffcc;
+      font-weight: 500;
+      color: #00ffcc;
+    }
+
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .car-info {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,255,208,0.08);
+      min-width: 300px;
+    }
+
+    .car-info img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .car-info h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #00ffd0;
+    }
+
+    .car-info p {
+      font-size: 15.5px;
+      margin: 8px 0;
+    }
+
+    .inspection-form {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 0 30px var(--glow);
+      min-width: 300px;
+    }
+
+    .inspection-form h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
+      text-shadow: 0 0 6px #00ffd0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 15px;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 0 12px var(--highlight);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      background: linear-gradient(to right, #00ffd0, #007cf0);
+      color: #000;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--glow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid #000;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .message.success {
+      background-color: rgba(0, 255, 150, 0.15);
+      color: #00ffb3;
+    }
+
+    .message.error {
+      background-color: rgba(255, 0, 0, 0.12);
+      color: #ff5e5e;
+    }
+
+    .checkmark {
+      font-size: 26px;
+      font-weight: bold;
+      animation: fadeCheck 0.6s ease-in-out;
+      display: inline-block;
+    }
+
+    @keyframes fadeCheck {
+      0% { transform: scale(0.6); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+
+    .pl::placeholder {
+      color: rgba(255, 255, 255, 0.295);
+      text-shadow: 0 1px 2px rgba(223, 223, 223, 0.678);
+    }
+
+    #drop-area {
+      border: 2px dashed #00ffd0;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      color: #ccc;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    #drop-area.hover {
+      background-color: rgba(0, 255, 208, 0.07);
+      border-color: #00ffd0;
+      color: #00ffd0;
+    }
+
+    #drop-area p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    #drop-area .browse {
+      color: #00ffd0;
+      font-weight: bold;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    input[type="file"] {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background: rgba(255,255,255,0.06);
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .genkada-footer {
+      background: linear-gradient(to right, #001f3f, #003366);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 -3px 15px rgba(0, 204, 255, 0.2);
+      margin-top: 3rem;
+    }
+
+    .genkada-footer h3 {
+      font-size: 1.6em;
+      margin-bottom: 12px;
+      color: #00ccff;
+    }
+
+    .genkada-footer p {
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    .footer-small {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #00aaff;
+    }
+
+    .footer-links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #00ccff;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #00ffff;
+    }
+
+    @media (max-width: 400px) {
+      .header-right {
+        display: none;
+      }
+
+      .header-left {
+        white-space: nowrap;
+      }
+
+      .header-center {
+        width: 50px;
+        margin-right: -1.8rem;
+      }
+
+      .genkada-logo {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-right {
+        display: none;
+      }
+
+      .header-center {
+        width: 200px;
+        margin-right: -1.8rem;
+      }
+
+      .genkada-logo {
+        width: 100%;
+      }
+    }
+
+    #drop-area {
+      border: 2px dashed #444;
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    #drop-area.dragging {
+      background: rgba(0, 150, 255, 0.1);
+      border-color: #00bfff;
+    }
+
+    .make-offer-btn {
+      background: #00e5ff;
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00e5ff;
+      transition: transform 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .make-offer-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Dark Background for Popup */
+    .offer-popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .offer-popup.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .offer-form {
+      background: #121212;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00e5ff;
+      color: white;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+
+      transform: scale(0.8);
+      opacity: 0;
+      animation: popup-zoom 0.4s ease forwards;
+    }
+
+    /* Zoom-In Animation */
+    @keyframes popup-zoom {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .offer-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #1e1e1e;
+      color: white;
+      border: 1px solid #2196f3;
+      border-radius: 5px;
+    }
+    .offer-form button {
+      width: 100%;
+      padding: 12px;
+      background: #00e5ff;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      cursor: pointer;
+      font-size: 30px;
+    }
+
+  </style>
+</head>
+<body>
+  <header class="inspection-header">
+    <div class="header-left">
+      <button onclick="history.back()">⬅ Go Back</button>
+    </div>
+    <div class="header-center">
+      <a href="index.html">
+        <img src="assets/real-logo.png" alt="Genkada Logo" class="genkada-logo" />
+      </a>
+    </div>
+    <div class="header-right">
+      <span class="verified-badge">🛡️ Verified Dealer</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="car-info">
+      <img id="carImage" src="" alt="Car Image">
+      <h2 id="carName"></h2>
+      <p><strong>Model:</strong> <span id="carModel"></span></p>
+      <p><strong>Price:</strong> <span id="carPrice"></span></p>
+
+      <!-- Make Offer Button -->
+      <button onclick="openOfferModal()" class="make-offer-btn">💬 Make an Offer</button>
+
+      <!-- Offer Form Modal -->
+      <div class="offer-popup" id="offerPopup">
+        <form class="offer-form" id="offerForm">
+          <div class="close-btn" onclick="closeOfferModal()">×</div>
+          <h2>Make an Offer</h2>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="tel" name="phone" placeholder="Phone Number" required />
+          <input type="number" name="offer" placeholder="Your Offer (₦)" required />
+
+          <input type="hidden" id="offer-car-name" name="carName">
+          <input type="hidden" id="offer-car-model" name="carModel">
+          <input type="hidden" id="offer-car-price" name="carPrice">
+          <input type="hidden" id="offer-car-img" name="carImage">
+
+          <button type="submit">Send Offer</button>
+          <p id="offerStatus" style="margin-top:10px; text-align:center;"></p>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="inspection-form">
+      <h2>Book a Car Inspection</h2>
+      <form id="inspectionForm" method="POST" action="send_inspection.php" enctype="multipart/form-data">
+
+      <!-- ✅ Correct -->
+      <input type="hidden" name="car_name" id="carNameInput">
+      <input type="hidden" name="car_model" id="carModelInput">
+      <input type="hidden" name="car_price" id="carPriceInput">
+
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" name="email">
+
+        <label for="date">Preferred Date</label>
+        <input type="date" name="date" required>
+
+        <label for="time">Preferred Time</label>
+        <input type="time" name="time" required>
+
+        <label for="note">Additional Note</label>
+        <textarea name="note" rows="4" style="resize: none;" placeholder="Your Text here . . ." class="pl"></textarea>
+
+        <label for="carImageUpload">Upload Car Photo (optional)</label>
+        <div id="drop-area">
+          <p>📁 Drag & Drop Image Here or <span class="browse">Browse</span></p>
+          <input type="file" id="carImageUpload" name="carImageUpload" accept="image/*">
+        </div>
+
+
+        <div class="g-recaptcha" data-sitekey="6LdbaYYrAAAAAHX5RUmdRjQ7wMtepPqqzdNLljbP"></div>
+        <br>
+
+        <button type="submit" id="submitBtn">Submit Inspection</button>
+      </form>
+      <div id="statusMsg" class="message"></div>
+    </div>
+  </div>
+
+  <footer class="genkada-footer">
+    <div class="footer-content">
+      <h3>🎉 Thank You for Booking with Genkada Automobile</h3>
+      <p>We’ve received your inspection request. Our trusted team will reach out to you shortly.</p>
+      
+      <div class="footer-links">
+        <a href="index.html" title="Return to Homepage">🏠 Home</a>
+        <a href="contact.html" title="Talk to Us">📞 Contact Support</a>
+      </div>
+
+      <p class="footer-small">🚗 Real Cars. Real Dealers. Real Value.</p>
+    </div>
+  </footer>
+
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const name = urlParams.get("name") || "Car Name";
+      const price = urlParams.get("price") || "--";
+      const model = urlParams.get("model") || "--";
+
+      let image = urlParams.get("img") || "placeholder.jpg";
+      if (image.startsWith("images/")) image = "../" + image;
+
+      document.getElementById("carName").textContent = name;
+      document.getElementById("carModel").textContent = model;
+      document.getElementById("carPrice").textContent = price;
+      document.getElementById("carImage").src = image;
+
+      document.getElementById("carNameInput").value = name;
+      document.getElementById("carModelInput").value = model;
+      document.getElementById("carPriceInput").value = price;
+
+      const form = document.getElementById("inspectionForm");
+      const fields = form.querySelectorAll("input, textarea");
+      const submitBtn = document.getElementById("submitBtn");
+      const statusMsg = document.getElementById("statusMsg");
+
+      fields.forEach((field, i) => {
+        field.addEventListener("blur", () => {
+          if (field.value.trim() !== "") {
+            const next = fields[i + 1];
+            if (next) {
+              setTimeout(() => {
+                next.scrollIntoView({ behavior: "smooth", block: "center" });
+              }, 200);
+            }
+          }
+        });
+      });
+
+      const fileInput = document.getElementById("carImageUpload");
+      const dropZone = fileInput.parentElement;
+
+      dropZone.style.transition = "transform 0.25s ease, box-shadow 0.25s ease";
+
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.style.transform = "scale(1.05)";
+        dropZone.style.boxShadow = "0 0 12px rgba(0,255,208,0.6)";
+        dropZone.style.border = "2px dashed #00ffd0";
+        dropZone.style.backgroundColor = "rgba(0, 255, 208, 0.05)";
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.style.transform = "scale(1)";
+        dropZone.style.boxShadow = "";
+        dropZone.style.border = "";
+        dropZone.style.backgroundColor = "";
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.style.transform = "scale(1)";
+        dropZone.style.boxShadow = "";
+        dropZone.style.border = "";
+        dropZone.style.backgroundColor = "";
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+        }
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner"></span> Sending Inspection Request...';
+        statusMsg.style.display = "none";
+
+        const recaptchaToken = grecaptcha.getResponse();
+
+        if (!recaptchaToken) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "Submit Inspection";
+          statusMsg.className = "message error";
+          statusMsg.innerHTML = "<span class='checkmark'>✖️</span> Please complete the reCAPTCHA.";
+          statusMsg.style.display = "block";
+          statusMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        const formData = new FormData(form);
+        formData.append("g-recaptcha-response", recaptchaToken);
+        const selectedCarImage = document.getElementById("carImage").src;
+        formData.append("carImage", selectedCarImage);
+
+        fetch("send_inspection.php", {
+          method: "POST",
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Submit Inspection";
+
+            if (data.success) {
+              form.reset();
+              grecaptcha.reset();
+              statusMsg.className = "message success";
+              statusMsg.innerHTML = "<span class='checkmark'>✔️</span> Inspection booked successfully!";
+            } else {
+              statusMsg.className = "message error";
+              statusMsg.innerHTML = "<span class='checkmark'>✖️</span> " + (data.message || "Failed to send inspection request.");
+            }
+
+            statusMsg.style.display = "block";
+            statusMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 3000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Submit Inspection";
+            statusMsg.className = "message error";
+            statusMsg.innerHTML = "<span class='checkmark'>✖️</span> Network error or server is unreachable.";
+            statusMsg.style.display = "block";
+            statusMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 3000);
+        });
+      });
+
+      // ✅ MAKE AN OFFER MODAL LOGIC
+      const offerModal = document.getElementById("offer-modal");
+      const offerBtn = document.getElementById("make-offer-btn");
+      const offerClose = document.getElementById("offer-close");
+
+      offerBtn.onclick = () => {
+        offerModal.classList.add("show");
+        offerModal.classList.remove("hide");
+      };
+
+      offerClose.onclick = () => {
+        offerModal.classList.add("hide");
+        offerModal.classList.remove("show");
+      };
+
+      document.getElementById("offer-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("offer-name").value.trim();
+        const phone = document.getElementById("offer-phone").value.trim();
+        const offerPrice = document.getElementById("offer-price").value.trim();
+
+        const carName = document.getElementById("carName").textContent;
+        const carModel = document.getElementById("carModel").textContent;
+        const carPrice = document.getElementById("carPrice").textContent;
+        const carImage = document.getElementById("carImage").src;
+
+        const response = await fetch("send_offer.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            phone,
+            offer: offerPrice,
+            carName,
+            carModel,
+            carPrice,
+            carImage
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert("✅ Offer sent successfully!");
+          this.reset();
+          offerModal.classList.remove("show");
+          offerModal.classList.add("hide");
+        } else {
+          alert("❌ Failed to send. Try again.");
+        }
+      });
+
+
+      const dropArea = document.getElementById("drop-area");
+
+  let scrollTriggered = false;
+
+  // Detect when user drags a file anywhere
+  window.addEventListener("dragenter", (e) => {
+    if (!scrollTriggered) {
+      scrollTriggered = true;
+      // Smoothly scroll to drop area
+      dropArea.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    dropArea.classList.add("dragging");
+  });
+
+  // Remove highlight and allow retriggering
+  window.addEventListener("dragleave", (e) => {
+    dropArea.classList.remove("dragging");
+    scrollTriggered = false;
+  });
+
+  window.addEventListener("dragend", () => {
+    dropArea.classList.remove("dragging");
+    scrollTriggered = false;
+  });
+
+  // Optional: highlight while dragging over the drop area
+  dropArea.addEventListener("dragover", (e) => {
+    e.preventDefault(); // Needed to allow drop
+    dropArea.classList.add("dragging");
+  });
+
+  dropArea.addEventListener("dragleave", () => {
+    dropArea.classList.remove("dragging");
+  });
+
+  dropArea.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropArea.classList.remove("dragging");
+    scrollTriggered = false;
+    
+    const fileInput = document.getElementById("carImageUpload");
+    fileInput.files = e.dataTransfer.files;
+  });
+});
+
+  const offerPopup = document.getElementById("offerPopup");
+  const offerForm = document.getElementById("offerForm");
+  const offerStatus = document.getElementById("offerStatus");
+
+  function openOfferModal() {
+    offerPopup.classList.add("show");
+
+    // Get car data from display elements
+    const name = document.getElementById('carName').textContent.trim();
+    const model = document.getElementById('carModel').textContent.trim();
+    const price = document.getElementById('carPrice').textContent.trim();
+    const imageSrc = document.getElementById('carImage').getAttribute('src');
+
+    // Set hidden inputs in offer form
+    document.getElementById('offer-car-name').value = name;
+    document.getElementById('offer-car-model').value = model;
+    document.getElementById('offer-car-price').value = price;
+    document.getElementById('offer-car-img').value = imageSrc;
+  }
+
+  function closeOfferModal() {
+    offerPopup.classList.remove("show");
+  }
+
+  offerForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  offerStatus.innerHTML = "⏳ Sending...";
+  
+  const formData = new FormData(offerForm);
+
+  fetch("send_offer.php", {
+    method: "POST",
+    body: formData
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        offerStatus.innerHTML = "✅ Offer sent successfully!";
+        offerForm.reset();
+      } else {
+        offerStatus.innerHTML = "❌ Failed to send. Try again.";
+      }
+    })
+    .catch(() => {
+      offerStatus.innerHTML = "❌ Network error. Try again.";
+    });
+});
+  </script>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    console.log("Car Name:", document.getElementById("carNameInput").value);
+    console.log("Car Model:", document.getElementById("carModelInput").value);
+    console.log("Car Price:", document.getElementById("carPriceInput").value);
+  });
+</script>
+</body>
+</html>
+
+</body>
+</html>

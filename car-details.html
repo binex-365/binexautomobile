@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Details - Genkada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="64x64"  href="assets/real-logo.png">
+  <style>
+    :root {
+      --primary: #00ccff;
+      --dark: #0a0f1a;
+      --card: #101829;
+      --text: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Urbanist', sans-serif;
+      background: radial-gradient(circle at top left, #020f1f, #03111a 80%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+     header {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0px 20px;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .header {
+      padding: 0px 20px;
+      background: radial-gradient(circle at top left, #020f1f, #0b1a2d, #061620 80%);
+      box-shadow: 0 0 25px #00ccff33;
+      border-bottom: 1px solid #00ccff22;
+      top: 0;
+      z-index: 1000;
+      height: 100px;
+      margin-bottom: 4rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+    }
+
+    .header img{
+      width: min(250px, 60vw); /* Max 250px, but scales down for small screens */
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      margin-top: 1.3rem;
+    }
+
+    .header img:hover {
+      transform: scale(1.05);
+    }
+
+    .back-btn {
+      background: linear-gradient(to right, #00ccff, #007a99);
+      border: none;
+      padding: 10px 20px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      white-space: nowrap;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 10px #00ccff55;
+      transition: background 0.3s ease, transform 0.2s ease;
+      text-shadow: 0px 1px 2px black;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(to right, #00aacc, #006680);
+      transform: scale(1.02);
+    }
+
+    .arrow-icon {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 20px;
+      animation: bounceLeftRight 1.5s infinite ease-in-out;
+    }
+
+    @keyframes bounceLeftRight {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(-5px);
+      }
+    }
+
+    .verified-badge {
+      font-size: 13px;
+      color: #00ccff;
+      background: #00ccff1a;
+      padding: 5px 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #00ccff33;
+    }
+
+    @media (max-width: 600px) {
+      .verified-badge {
+        display: none;
+      }
+
+      .header img {
+        margin-left: 2rem;
+        width: 100%;
+      }
+
+      .header-center {
+        width: 130px;
+      }
+
+      .back-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+    }
+
+    .main {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .left, .right {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 0 25px #00ccff22;
+      padding: 20px;
+    }
+
+    .left {
+      flex: 1 1 50%;
+    }
+
+    .right {
+      flex: 1 1 45%;
+    }
+
+    .main-image {
+      width: 100%;
+      max-height: 500px; /* Increased from 250px */
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #00000019;
+    }
+
+    .main-image img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0px 3px 5px rgba(96, 240, 240, 0.026);
+      margin-top: 2rem;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+
+
+    .gallery img {
+      max-width: 100%;
+      height: 180px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      border: 2px solid #00ccff22;
+      object-fit: cover;
+    }
+
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      border-color: #00ccff;
+    }
+
+    .car-title {
+      font-size: 26px; /* Was 24px */
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .car-model {
+      font-size: 26px; /* Was 24px */
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: rgb(110, 110, 110);
+      text-shadow: 0px 1px 2px #00ccff;
+    }
+
+    .price {
+      font-size: 24px; /* Was 22px */
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .car-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .info-box {
+      background: #0e1727;
+      padding: 12px 15px;
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .actions button {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .book {
+      background: linear-gradient(to right, #00ccff, #007a99);
+      color: #000;
+    }
+
+    .book:hover {
+      background: linear-gradient(to right, #00aacc, #006680);
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .save {
+      background: #1c2635;
+      color: #eee;
+      border: 1px solid #00ccff33;
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      padding: 20px;
+      font-size: 13px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+      .main {
+        flex-direction: column;
+      }
+      .main-image {
+        max-height: 200px;
+      }
+    }
+
+   #lightboxOverlay {
+      display: none; /* Hide overlay initially */
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      object-fit: contain;
+      box-shadow: 0 0 30px #00ccff66;
+    }
+
+    /* Fix the position of the close button */
+    .close-btn {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 30px;
+      background: #0a0f1a;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* Arrow buttons */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: #00ccff;
+      background: #0a0f1a;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1001;
+      user-select: none;
+    }
+
+    .arrow.left { left: -60px; }
+    .arrow.right { right: -60px; }
+
+    .arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    @media (max-width: 900px) {
+     .arrow.left { left: 0px; }
+     .arrow.right { right: 0px; }
+    }
+    
+    .trust-message {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      background: #03111a;
+      border-left: 5px solid #00ccff;
+      padding: 15px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #cceeff;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ccff22;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideFadeIn 1.3s forwards ease-out;
+    }
+
+    .trust-icon {
+      font-size: 32px;
+      color: #00ccff;
+      margin-right: 12px;
+      animation: bounce 1.2s infinite ease-in-out; /* ⏩ faster bounce */
+      text-shadow:
+        0 0 6px #00ccff,
+        0 0 12px #00ccff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff;
+    }
+
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-8px);
+      }
+      70% {
+        transform: translateY(4px);
+      }
+    }
+
+
+    .trust-text {
+      flex: 1;
+    }
+
+    .badge {
+      background: #00ccff33;
+      padding: 2px 6px;
+      font-size: 12px;
+      border-radius: 4px;
+      color: #00ccff;
+      margin-left: 5px;
+    }
+
+    @keyframes slideFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .inspect-cta-box {
+      background: #0e1727;
+      margin: 40px auto;
+      padding: 25px 20px;
+      border-left: 5px solid #00ccff;
+      border-radius: 10px;
+      color: #eee;
+      box-shadow: 0 0 20px rgba(0, 204, 255, 0.15);
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .inspect-cta-box h3 {
+      font-size: 20px;
+      color: #00ccff;
+      margin-bottom: 10px;
+    }
+
+    .inspect-cta-box p {
+      font-size: 15px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .book-now-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-weight: 600;
+      background: linear-gradient(to right, #00ccff, #007a99);
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .book-now-btn:hover {
+      background: linear-gradient(to right, #00aacc, #006680);
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .gallery img {
+        width: 45%;  /* or 48% for 2 per row */
+        height: auto;
+        margin-bottom: 10px;
+      }
+    }
+
+    .shadow {
+      box-shadow: 0px 4px 6px rgb(11, 46, 65);
+      padding: 15px 35px;
+      padding-bottom: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .wht {
+      width: 25px;
+      border-radius: 5000px;
+      margin-right: 4px;
+    }
+    
+    .save {
+      background-color: #0057ff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 0 10px #0057ff88;
+      transition: background-color 0.3s ease;
+    }
+    .save:hover {
+      background-color: #003fcc;
+    }
+
+    .save-message {
+      display: none;
+      background-color: #d1ffd6;
+      color: #027a0b;
+      padding: 10px 15px;
+      margin-top: 15px;
+      border: 1px solid #4caf50;
+      border-radius: 6px;
+      font-size: 14px;
+      animation: fadeInOut 3s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .make-offer-btn {
+      background: #00e5ff;
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00e5ff;
+      transition: transform 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .make-offer-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Dark Background for Popup */
+    .offer-popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+      box-sizing: border-box;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .offer-popup.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .offer-form {
+      background: #121212;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00e5ff;
+      color: white;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+
+      transform: scale(0.8);
+      opacity: 0;
+      animation: popup-zoom 0.4s ease forwards;
+    }
+
+    /* Zoom-In Animation */
+    @keyframes popup-zoom {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .offer-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #1e1e1e;
+      color: white;
+      border: 1px solid #2196f3;
+      border-radius: 5px;
+    }
+    .offer-form button {
+      width: 100%;
+      padding: 12px;
+      background: #00e5ff;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      cursor: pointer;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <button class="back-btn" onclick="history.back()">
+      <span class="arrow-icon">←</span> Go Back
+    </button>
+
+    <a href="index.html">
+      <div class="header-center">
+        <img src="assets/real-logo.png" class="genkada-logo" alt="Genkada Logo" />
+      </div>
+    </a>
+    
+    <div class="header-right">
+      <span class="verified-badge">✅ Verified Dealer</span>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="left">
+      <div class="main-image">
+        <img id="mainCarImage" src="" alt="Main Car Image" />
+      </div>
+      <div class="gallery" id="galleryContainer"></div>
+    </div>
+
+    <div class="right">
+      <div class="shadow">
+        <div class="car-title" id="carName">Loading...</div>
+        <div class="car-model" id="carModel">Loading...</div>
+        <div class="price" id="carPrice">₦0</div>
+        <div class="car-desc" id="carDesc">Loading car description...</div>
+      </div>
+
+      <div class="trust-message">
+        <div class="trust-icon">🔒</div>
+        <div class="trust-text">
+          <strong>Trusted Dealer:</strong> Genkada Automobile is a verified car seller with thousands of happy customers across Nigeria. Buy with confidence.
+          <br>
+          We don’t just sell cars — we deliver trust. All vehicles are verified, inspected, and offered by real professionals. You’re safe with us
+          <div class="badge">✅ Verified</div>
+        </div>
+      </div>
+      Email:  | Phone: 
+      <div class="info-box">
+        🏢 30, Victoria Street, Lagos<br />
+        ☎️ 08028462823 • ✉️ Larryomis2001@yahoo.com
+      </div>
+
+      <div class="actions">
+        <button class="book" onclick="goToInspection()">🚗 Book Inspection</button>
+        <button class="whatsapp" onclick="shareWhatsApp()"><img src="assets/wts.png" class="wht"> Share on WhatsApp</button>
+
+        <!-- Make Offer Button -->
+        <button onclick="openOfferModal()" class="make-offer-btn">💬 Make an Offer</button>
+
+        <!-- Offer Form Modal -->
+        <div class="offer-popup" id="offerPopup">
+          <form class="offer-form" id="offerForm">
+            <div class="close-btn" onclick="closeOfferModal()">×</div>
+            <h2>Make an Offer</h2>
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+            <input type="number" name="offer" placeholder="Your Offer (₦)" required />
+            <button type="submit">Send Offer</button>
+            <p id="offerStatus" style="margin-top:10px; text-align:center;"></p>
+          </form>
+        </div>
+
+        <button class="save" onclick="saveCar()">💾 Save Car</button>
+        <div class="save-message" id="saveMessage">✅ Car saved successfully!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inspect-cta-box animate-cta" id="inspectBox">
+    <h3>Not Fully Convinced Yet?</h3>
+    <p>
+      We understand the importance of trust when buying a car. If you'd like to verify everything for yourself, you can book a real-time inspection with our team.
+    </p>
+    <button class="book-now-btn" onclick="goToInspection()">🚗 Book Real Inspection Now</button>
+  </div>
+
+  <div id="lightboxOverlay">
+    <div class="lightbox-content">
+      <span class="close-btn" onclick="closeLightbox()">✖</span>
+      <img id="lightboxImage" src="" alt="Preview" />
+      <div class="arrow left" onclick="prevImage()">❮</div>
+      <div class="arrow right" onclick="nextImage()">❯</div>
+    </div>
+  </div>
+
+  <footer>
+    🚘 Thank you for trusting Genkada Automobile – Real People, Real Cars.
+  </footer>
+
+
+  
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const params = new URLSearchParams(window.location.search);
+  const carId = params.get("id");
+
+  if (!carId) {
+    alert("No car selected.");
+    window.location.href = "carsales.html";
+    return;
+  }
+
+  try {
+    const response = await fetch(`get_car.php?id=${carId}`);
+    const data = await response.json();
+
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+
+    const carNameEl = document.getElementById("carName");
+    const carModelEl = document.getElementById("carModel");
+    const carPriceEl = document.getElementById("carPrice");
+    const carDescEl = document.getElementById("carDesc");
+    const mainCarImageEl = document.getElementById("mainCarImage");
+    const galleryContainer = document.getElementById("galleryContainer");
+
+    if (!carNameEl || !carModelEl || !carPriceEl || !carDescEl || !mainCarImageEl || !galleryContainer) {
+      alert("Required page elements are missing.");
+      console.error("Missing elements:", {carNameEl, carModelEl, carPriceEl, carDescEl, mainCarImageEl, galleryContainer});
+      return;
+    }
+
+    // Fill car details
+    carNameEl.textContent = data.name || "";
+    carModelEl.textContent = data.model || "";
+    carPriceEl.textContent = data.price || "";
+    carDescEl.textContent = data.description || "";
+
+    // Set main image
+    if (data.gallery_images && data.gallery_images.length > 0) {
+      mainCarImageEl.src = data.gallery_images[0];
+    } else {
+      mainCarImageEl.src = "assets/default-car.jpg";
+    }
+
+    // Store full gallery images globally for lightbox
+    window.galleryImages = data.gallery_images || [];
+
+    // Clear gallery thumbnails container
+    galleryContainer.innerHTML = "";
+
+    // Show max 4 thumbnails only on page, no wrapping
+    data.gallery_images.slice(0, 4).forEach((imgSrc, idx) => {
+      const imgEl = document.createElement("img");
+      imgEl.src = imgSrc;
+      imgEl.alt = "Car view";
+      imgEl.classList.add("gallery-image");
+      imgEl.style.cursor = "pointer";
+      imgEl.style.objectFit = "cover";
+      imgEl.style.flexShrink = "0";
+      imgEl.style.marginRight = "8px";
+
+      // Clicking a thumbnail opens lightbox at correct index
+      imgEl.addEventListener("click", () => openLightbox(idx));
+
+      galleryContainer.appendChild(imgEl);
+    });
+
+    // Main image click opens lightbox at first image
+    mainCarImageEl.style.cursor = "pointer";
+    mainCarImageEl.onclick = () => openLightbox(0);
+
+  } catch (error) {
+    console.error("Error fetching car details:", error);
+    alert("Unable to load car details.");
+  }
+});
+
+// Lightbox functionality
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  const overlay = document.getElementById("lightboxOverlay");
+  const lightboxImage = document.getElementById("lightboxImage");
+
+  if (!window.galleryImages || window.galleryImages.length === 0) {
+    console.warn("No gallery images found for lightbox.");
+    return;
+  }
+
+  lightboxImage.src = window.galleryImages[currentIndex];
+  overlay.style.display = "flex";
+}
+
+function closeLightbox() {
+  const overlay = document.getElementById("lightboxOverlay");
+  overlay.style.display = "none";
+}
+
+function prevImage() {
+  if (!window.galleryImages || window.galleryImages.length === 0) return;
+  currentIndex = (currentIndex - 1 + window.galleryImages.length) % window.galleryImages.length;
+  document.getElementById("lightboxImage").src = window.galleryImages[currentIndex];
+}
+
+function nextImage() {
+  if (!window.galleryImages || window.galleryImages.length === 0) return;
+  currentIndex = (currentIndex + 1) % window.galleryImages.length;
+  document.getElementById("lightboxImage").src = window.galleryImages[currentIndex];
+}
+
+// Close lightbox if clicking outside image
+document.getElementById("lightboxOverlay").addEventListener("click", (e) => {
+  if (e.target.id === "lightboxOverlay") closeLightbox();
+});
+</script>
+
+  <script>
+    function goToInspection() {
+      const car = localStorage.getItem("selectedCar");
+      console.log("LocalStorage selectedCar:", car);  // <-- Add this line here
+
+      if (car) {
+        const c = JSON.parse(car);
+        const params = `?name=${encodeURIComponent(c.name)}&price=${encodeURIComponent(c.price)}&model=${encodeURIComponent(c.model || '')}&img=${encodeURIComponent(c.image)}`;
+        window.location.href = "inspection.html" + params;
+      } else {
+        window.location.href = "inspection.html";
+      }
+    }
+
+
+
+    function shareWhatsApp() {
+      const car = localStorage.getItem("selectedCar");
+      if (!car) return;
+
+      const c = JSON.parse(car);
+      const msg = `🚗 Check out this car from Genkada Automobile!
+
+      🔹 Name: ${c.name}
+      💰 Price: ${c.price}
+      📅 Model: ${c.model}
+      📝 Description: ${c.description}
+
+      🔗 View more at: https://genkadaautomobile.com/car-details.html`;
+
+        const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+        window.open(waUrl, '_blank');
+    }
+
+    function changeMainImage(thumbnail) {
+      document.getElementById("mainCarImage").src = thumbnail.src;
+    }
+  </script>
+
+  <script>
+    function saveCar() {
+      const car = JSON.parse(localStorage.getItem("selectedCar"));
+      if (!car) return;
+
+      let savedCars = JSON.parse(localStorage.getItem("savedCars")) || [];
+
+      const alreadySaved = savedCars.some(c => c.name === car.name && c.price === car.price);
+
+      if (!alreadySaved) {
+        savedCars.push(car);
+        localStorage.setItem("savedCars", JSON.stringify(savedCars));
+      }
+
+      // Show success message
+      const msg = document.getElementById("saveMessage");
+      msg.style.display = "block";
+      msg.style.animation = "fadeInOut 3s ease-in-out";
+
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 3000);
+    }
+
+    const offerPopup = document.getElementById("offerPopup");
+  const offerForm = document.getElementById("offerForm");
+  const offerStatus = document.getElementById("offerStatus");
+
+  function openOfferModal() {
+    offerPopup.classList.add("show");
+  }
+
+  function closeOfferModal() {
+    offerPopup.classList.remove("show");
+  }
+
+  offerForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    offerStatus.textContent = "⏳ Sending your offer...";
+
+    const formData = new FormData(offerForm);
+    const data = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      offer: formData.get("offer"),
+    };
+
+    try {
+      const res = await fetch("send_offer.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        offerStatus.textContent = "✅ Offer sent successfully!";
+        offerStatus.style.color = "lightgreen";
+        offerForm.reset();
+
+        setTimeout(() => {
+          closeOfferModal();
+          offerStatus.textContent = "";
+        }, 2000);
+      } else {
+        offerStatus.textContent = "❌ Failed to send. Try again.";
+        offerStatus.style.color = "red";
+      }
+    } catch (error) {
+      offerStatus.textContent = "⚠️ Network error. Please try later.";
+      offerStatus.style.color = "orange";
+    }
+  });
+  </script>
+</body>
+</html>

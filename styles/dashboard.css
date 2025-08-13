@@ -1,0 +1,179 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  background: linear-gradient(135deg, #030b1c, #081a37, #030a1f);
+  background-size: 200% 200%;
+  animation: waveBackground 14s ease-in-out infinite;
+}
+@keyframes waveBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.header {
+  text-align: center;
+  padding: 40px 20px 10px;
+}
+.header h1 {
+  font-size: 2.7rem;
+  color: #5ab0ff;
+  text-shadow: 0 0 14px #3274ff;
+}
+.logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background: #ff3e3e;
+  color: white;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 12px #ff3e3e;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 1rem;
+}
+.logout:hover {
+  background: #ff5e5e;
+  box-shadow: 0 0 20px #ff5e5e;
+}
+.container {
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+}
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  box-shadow: 0 0 15px rgba(0, 30, 255, 0.15);
+  transition: 0.3s ease;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 22px rgba(0, 98, 255, 0.3);
+}
+.card h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: #3ea0ff;
+  margin-bottom: 10px;
+}
+.card p {
+  margin: 6px 0;
+  font-size: 1.05rem;
+}
+.card p strong {
+  color: #00aaff;
+}
+.card img {
+  display: block;
+  margin-top: 14px;
+  max-width: 280px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #3a6aff44;
+  box-shadow: 0 0 12px #3a6aff22;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #0b59ff, #0c224d, #1852ff, #0c224d, #0b59ff);
+  background-size: 400% 400%;
+  border-radius: 20px;
+  z-index: -1;
+  animation: deepBlueSpin 8s linear infinite;
+}
+@keyframes deepBlueSpin {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.edit-btn, .delete-btn {
+  margin-top: 12px;
+  margin-right: 10px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+.edit-btn {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  box-shadow: 0 0 8px #007bff;
+}
+.delete-btn {
+  background: #ff4d4d;
+  color: white;
+  box-shadow: 0 0 8px #ff4d4d;
+}
+.delete-confirm-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #081a37;
+  border: 2px solid #00f0ff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #00f0ff;
+  z-index: 9999;
+  display: none;
+  text-align: center;
+  animation: fadeInOut 0.4s ease-in-out;
+}
+@keyframes fadeInOut {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.confirm-buttons button {
+  margin: 15px 10px 0;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.confirm-yes {
+  background: #00e1ff;
+  color: #000;
+  box-shadow: 0 0 10px #00f0ff;
+}
+.confirm-no {
+  background: #ff5252;
+  color: #fff;
+  box-shadow: 0 0 10px #ff5252;
+}
+.undo-save-btns {
+  display: none;
+  margin-top: 20px;
+}
+.undo-save-btns button {
+  background: linear-gradient(135deg, #00f0ff, #0055ff);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 0 15px #00f0ff;
+  cursor: pointer;
+}

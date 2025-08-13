@@ -1,0 +1,196 @@
+@media (max-width: 450px) {
+  .main-header {
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .social-icons {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .logo {
+    margin-left: -0.1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-bar, .merge {
+    display: none;
+  }
+
+  .sidy {
+    position: fixed;
+    bottom: 0;
+  }
+
+  .logo {
+    height: 0px;
+    margin-top: -0.4rem;
+    border-color: transparent;
+  }
+
+  .log {
+    width: 150px;
+    margin-left: 1rem;
+  }
+
+  .ham-div {
+    margin-left: -2rem;
+  }
+}
+
+@media(max-width: 600px) {
+  .top-bar {
+    display: none;
+  }
+
+  .main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  .ham-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    margin-top: 0.5rem;
+    padding: 5px;
+  }
+
+  .ham {
+    width: 100px;
+  }
+
+  .lnks, .social-icons {
+    display: none;
+  }
+
+  .sidebar {
+    min-width: 100px;
+    max-width: 89px;
+    border-right: 3px solid #4f8cff;
+    font-size: 15px;
+  } 
+
+  .search-form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-img img, .hero-img {
+    width: 200px;
+  }
+
+  .logo {
+    border: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .top-bar, .merge {
+    display: none;
+  }
+
+  .logo {
+    width: 230px;
+    border: none;
+  }
+
+  .logo:hover {
+    box-shadow: none;
+  }
+
+  .log {
+    max-width: 100%;
+    margin-top: 1.6rem;
+  }
+
+  .lnks {
+    display: none;
+  }
+
+  .social-icons {
+    display: flex;
+    position: fixed;
+    top: 25px;
+    left: 50%;
+  }
+
+   .ham-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    margin-top: 0.5rem;
+    padding: 5px;
+  }
+
+  .ham {
+    width: 100px;
+  }
+
+  .sidebar {
+    min-width: 230px;
+    max-width: 299px;
+    border-right: 3px solid #4f8cff;
+    font-size: 15px;
+  } 
+
+  .search-form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-header {
+    position: fixed;
+  }
+
+  .all {
+    margin-top: 4rem;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1244px) {
+  .lnks {
+    display: none;
+  }
+
+  .ham-div, .logo, .flex {
+    display: flex;
+  }
+
+  .social-icons {
+    display: flex;
+    position: absolute;
+    left: 60%;
+    top: 19px;
+  }
+
+  .sidy ul {
+    margin-top: 50px;
+  }
+
+  .cancel {
+    top: 38px;
+  }
+
+  .dropdown-container {
+    margin-top: 16px;
+  }
+}
+
+@media (min-width: 1245px) and (max-width: 1250px) {
+  .logo {
+    margin-left: -1rem;
+  }
+}
+
+@media (min-width: 1251px) {
+  .logo {
+    margin-left: 0rem;
+  }
+}

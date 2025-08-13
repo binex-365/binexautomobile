@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Genkada Automobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/gen.css">
+    <link rel="stylesheet" href="styles/RESPONSIVENESS/gen-response.css">
+    <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+    <style>
+        .dropdown-container {
+            border: 2px solid #377dff;
+            position: absolute;
+            top: 240px;
+            backdrop-filter: blur(18px);
+            width: 180px;
+            margin-left: -1.7rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 7px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding-bottom: 0.6rem;
+            transform: translateY(1050px);
+            transition: all .5s;
+        }
+
+        .dropdown-container.ads {
+            transform: translateY(0);
+        }
+
+        .sidy .ck {
+            display: none;
+        }
+
+        .category-section {
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(255, 255, 255, 0.05));
+        border-radius: 15px;
+        padding: 40px 20px;
+        margin: 50px auto;
+        max-width: 1000px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 132, 255, 0.3);
+        backdrop-filter: blur(12px);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease;
+        }
+
+    .category-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 25px;
+      text-shadow: 0 0 5px #00aaff;
+    }
+
+    .category-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .category-links a {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      padding: 18px 20px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .category-links a:hover {
+      background-color: rgba(0, 132, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px rgba(0, 132, 255, 0.3);
+    }
+
+    .ba-top {
+        position: absolute;
+        border: none;
+        padding: 15px 23px;
+        border-radius: 5px;
+        backdrop-filter: blur(30px);
+        background: linear-gradient(120deg, #23283a 60%, #4f8cff 100%);
+        color: rgb(222, 222, 222);
+        box-shadow: 0 4px 8px #5a94ff;
+        text-shadow: 0 1px 2px;
+        cursor: pointer;
+        transition: all .5s;
+        right: 45px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: opacity 0.4s;
+    }
+
+    .ba-top:hover {
+        background: linear-gradient(120deg, #313853 60%, #5a92fa 100%);
+        color: rgb(255, 255, 255);
+        box-shadow: 0 5px 10px #699cf9;
+        text-shadow: 0 1px 3px;
+        padding: 16px 26px;
+    }
+
+    footer {
+        margin-top: 4rem;
+    }
+
+    .skipping {
+        box-shadow: 0 4px 8px #699cf9;
+        background: linear-gradient(120deg, #1a213b 60%, #113f94 70%);
+        padding: 20px;
+        border-top-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        transition: all 0.8s;
+        position: fixed; /* fixed so it stays in place */
+        bottom: 20px;    /* or top: 20px if you want it at the top */
+        right: 20px;
+        max-width: 500px;
+        z-index: 5000;
+        display: none;
+    }
+
+
+    .skipping::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        background: linear-gradient(120deg, #1a213b 60%, #113f94 70%);
+        border-top-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        display: flex;
+        align-items: center;
+        z-index: -1;
+        justify-content: center;
+        transition: all 0.8s;
+    }
+
+    .skipping:hover::before {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+    }
+
+    .skipping:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .skipping h3 {
+        text-shadow: 0 1px 2px black;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+
+    .skipping p {
+        text-shadow: 0 1px 2px black;
+        margin-bottom: 1rem;
+    }
+
+    .skipping h4 {
+        font-family: cursive;
+        text-shadow: 0 1px 2px black;
+        font-style: oblique;
+        font-size: 16px;
+        margin-bottom: 1rem;
+        line-height: 1.2rem;
+    }
+
+    .skipping button {
+        padding: 15px 20px;
+        background-color: transparent;
+        box-shadow: 4px 0px 8px #00aaff;
+        border: none;
+        backdrop-filter: blur(20px);
+        color: white;
+        text-shadow: 0 1px 2px black;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all .5s;
+    }
+
+    .skipping button:hover {
+        box-shadow: 0px 4px 8px #00aaff;
+        background: linear-gradient(120deg, #222b49 60%, #113f94 70%);
+    }
+
+    .skipping .ca {
+        position: absolute;
+        font-size: 35px;
+        text-shadow: 0px 1px 2px;
+        right: 0px;
+        top: 0px;
+        cursor: pointer;
+        padding: 2px 10px;
+        transition: background-color .2s ease-in-out;
+    }
+
+    .skipping .ca:hover {
+        text-shadow: 0px 1px 2px black;
+        color: red;
+    }
+
+    @media (max-width: 768px) {
+        .skipping {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-radius: 0;
+            margin: 0;
+            max-width: 100%;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-flex">
+            <span class="bxi">Office Hours: 9:00am – 5:00pm</span>
+            <span class="bxii">Email: Larryomis2001@yahoo.com | Phone: 08028462823</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container nav-flex">
+            <a href="index.html" style="text-decoration: none;" class="logo">
+                <img src="assets/real-logo.png" class="log">
+                <div class="merge">
+                    <h1>Genkada</h1><span>Automobile</span>
+                </div>
+            </a>
+            <nav>
+                <ul class="lnks">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="carsales.html">Car Sales</a></li>
+                    <li class="dropdown">
+                        <a class="about-link" style="cursor: pointer;">More</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="vision.html">Vision</a></li>
+                            <li><a href="purpose.html">Purpose</a></li>
+                            <li><a href="goals.html">Goals</a></li>
+                            <li><a href="mission.html">Mission</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="dropdown">
+                        <a class="about-link" style="cursor: pointer;">Categories</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="maintenance.html" style="white-space: nowrap;">General Maintenance</a></li>
+                            <li><a href="re-wiring.html">Re-wiring</a></li>
+                            <li><a href="parnel.html">Panel Beating</a></li>
+                            <li><a href="paint.html">Painting</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://wa.me/2348028462823" target="_blank" rel="noopener">
+                    <img src="assets/wt.png" alt="WhatsApp">
+                </a>
+                <a href="https://www.facebook.com/marketplace/you/selling" target="_blank" rel="noopener">
+                    <img src="assets/face.jpeg" alt="Facebook">
+                </a>
+            </div>
+
+        </div>
+
+        <div class="ham-div">
+            <img src="assets/ham.png" class="ham">
+        </div>
+        
+    </header>
+    <div class="viewer-bar">
+        <div class="container">
+            <span class="viewer-label">Total Website Viewers:</span>
+            <span id="viewer-count">0</span>
+        </div>
+    </div>
+
+    <div class="sidy">
+        <input type="checkbox" id="check" class="ck" onclick="
+            moreFunction();
+        ">
+        <div class="cancel" style="position: absolute; top: -5px;">&times;</div>
+        <ul>
+            <a href="about.html"><li>About</li></a>
+            <a href="vision.html"><li>Vision</li></a>
+            <a href="purpose.html"><li>Purpose</li></a>
+            <a href="goals.html"><li>Goals</li></a>
+            <a href="mission.html"><li>Mission</li></a>
+            <a href="service.html"><li>Services</li></a>
+            <div class="dropdown-container js-drop">
+                <a href="contact.html"><li>Contact</li></a>
+                <a href="carsales.html"><li>Car Sales</li></a>
+                <a href="gallery.html"><li>Gallery</li></a>
+            </div>
+            <label for="check" style="font-size: 18px; border: none; text-shadow: 0px 1px 2px white; display: flex; justify-content: center; margin-top: 1.4rem; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.603); align-items: center; padding: 9px 15px; border-radius: 3px; backdrop-filter: blur(26px); position: relative;" id="more" onclick="moreFunction()"><span class="more">More <span class="dot">. . .</span></span></label>
+        </ul>
+    </div>
+
+    <div class="all">
+        <!-- Hero/Search Section -->
+    <section id="home" class="hero-search-section">
+        <div class="container hero-search-flex">
+            <div class="hero-text">
+                <h2>Buy & Sell Cars in Nigeria</h2>
+                <form class="location-form">
+                    <label for="location" style="color:#fff;">Select Location:</label>
+                    <select id="location" name="location">
+                        <option value="lagos">Lagos</option>
+                        <option value="abuja">Abuja</option>
+                        <option value="portharcourt">Port Harcourt</option>
+                        <option value="others">Other</option>
+                    </select>
+                </form>
+                <form class="search-form" id="searchForm">
+                    <input type="text" id="homepageSearch" placeholder="Search for Car Listenings, services, or brands...">
+                    <button type="submit">Search</button>
+                </form>
+
+                <p>Sell Joyfully | Buy Proudly<br>
+                Experience affordable car sales, expert maintenance, and world-class service delivery.</p> 
+
+                <div class="skipping">
+                    <div class="ca">&times;</div>
+                    <h3>Looking for your dream car?</h3>
+                    <p>We've got you covered with top-quality, verified vehicles at unbeatable prices.</p>
+                    <h4>Browse our latest car listening and book an inspection in just a few clicks.</h4>
+                    <button onclick="window.location.href='carsales.html'">Skip to Car Listenings...</button>
+                </div>
+            </div>
+            <div class="hero-img">
+                <img src="assets/land-cr.png" alt="Hero Car">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sidebar + Main Content -->
+    <div class="container main-flex">
+        <!-- Sidebar -->
+         <div class="wdt">
+            <aside class="sidebar">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="carsales.html">Car Sales</a></li>
+                    <li><a href="maintenance.html">General Maintenance</a></li>
+                    <li><a href="re-wiring.html">Re-wiring</a></li>
+                    <li><a href="parnel.html">Panel Beating</a></li>
+                    <li><a href="paint.html">Painting</a></li>
+                    <li><a href="service.html">Servicing</a></li>
+                </ul>
+            </aside>
+         </div>
+        
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- How to Buy & Sell Section -->
+            <section class="how-to-section">
+                <div class="how-to-banner">
+                    <img src="assets/blc.jpeg" alt="How to buy & sell" style="width:100%;max-width:400px;">
+                </div>
+                <div class="how-to-text">
+                    <h2>How to buy & sell on Genkada Automobile</h2>
+                    <p>Browse our categories, search for your desired car or service, and contact us for a remarkable experience!</p>
+                </div>
+            </section>
+
+            <!-- Featured Cars Section -->
+            <section class="featured-cars">
+                <h2>Today's Featured Cars</h2>
+                <div class="car-cards">
+                    <div class="car-card">
+                        <img src="assets/cam.jpeg" alt="Toyota Camry 2015">
+                        <h3>Toyota Camry 2015</h3>
+                        <p>Restored, serviced, and ready for you.</p>
+                    </div>
+                    <div class="car-card">
+                        <img src="assets/acc.jpeg" alt="Honda Accord 2017">
+                        <h3>Honda Accord 2017</h3>
+                        <p>Affordable and reliable, like new.</p>
+                    </div>
+                    <div class="car-card">
+                        <img src="assets/bf.jpeg" alt="Mercedes Benz C300">
+                        <h3>Mercedes Benz C300</h3>
+                        <p>Luxury, performance, and value combined.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mission, Vision, Purposes, Goals -->
+            <section id="mission" class="info-section">
+                <h2>Our Mission</h2>
+                <ul>
+                    <li>To ensure every client has a remarkable experience with our service delivery.</li>
+                    <li>To provide affordable, quality vehicles and reliable automotive services.</li>
+                    <li>To build lasting relationships based on trust and satisfaction.</li>
+                </ul>
+            </section>
+            <section id="vision" class="info-section">
+                <h2>Our Vision</h2>
+                <ul>
+                    <li>To be Nigeria’s leading automobile solution provider.</li>
+                    <li>To set the standard for excellence in car restoration and sales.</li>
+                    <li>To make quality vehicles accessible to everyone.</li>
+                </ul>
+            </section>
+            <section id="purposes" class="info-section">
+                <h2>Our Purposes</h2>
+                <ul>
+                    <li>Import and restore damaged vehicles for resale at affordable prices.</li>
+                    <li>Offer comprehensive car maintenance, re-wiring, panel-beating, painting, and servicing.</li>
+                    <li>Deliver exceptional value and customer satisfaction.</li>
+                </ul>
+            </section>
+            <section id="goals" class="info-section">
+                <h2>Our Goals</h2>
+                <ul>
+                    <li>To sell high-quality, affordable cars to Nigerians.</li>
+                    <li>To provide expert panel-beating, re-wiring, painting, and servicing.</li>
+                    <li>To expand our reach through digital platforms and social media.</li>
+                    <li>To become a household name in the Nigerian automobile industry.</li>
+                </ul>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="services-section">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service" id="car-sales">
+                        <img src="assets/cra.jpeg" alt="Car Sales">
+                        <h3>Car Sales</h3>
+                        <p>Affordable, quality cars imported and restored for you.</p>
+                    </div>
+                    <div class="service" id="maintenance">
+                        <img src="assets/mai.webp" alt="General Maintenance">
+                        <h3>General Maintenance</h3>
+                        <p>Keep your car running smoothly with our expert maintenance.</p>
+                    </div>
+                    <div class="service" id="rewiring">
+                        <img src="assets/re.webp" alt="Re-wiring">
+                        <h3>Re-wiring</h3>
+                        <p>Professional electrical repairs and upgrades for all vehicles.</p>
+                    </div>
+                    <div class="service" id="panel-beating">
+                        <img src="assets/pa.jpeg" alt="Panel Beating">
+                        <h3>Panel Beating</h3>
+                        <p>Restore your car’s bodywork to perfection.</p>
+                    </div>
+                    <div class="service" id="painting">
+                        <img src="assets/pai.jpeg" alt="Painting">
+                        <h3>Painting</h3>
+                        <p>High-quality car painting for a fresh, new look.</p>
+                    </div>
+                    <div class="service" id="servicing">
+                        <img src="assets/serv.avif" alt="Servicing">
+                        <h3>Servicing</h3>
+                        <p>Comprehensive servicing to keep your car in top condition.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us Section -->
+            <section class="why-choose-section info-section">
+                <h2>Why Choose Genkada Automobile?</h2>
+                <ul>
+                    <li><strong>Certified Technicians:</strong> Our team is made up of highly trained and certified professionals.</li>
+                    <li><strong>Warranty on All Services:</strong> We offer a warranty on all repairs and maintenance for your peace of mind.</li>
+                    <li><strong>Customer Support:</strong> 24/7 customer support via phone, email, and WhatsApp.</li>
+                    <li><strong>Flexible Payment Options:</strong> Pay in installments or choose from multiple payment methods.</li>
+                    <li><strong>Free Consultation:</strong> Get expert advice before making any purchase or service decision.</li>
+                    <li><strong>Trusted by Hundreds:</strong> Join our growing family of satisfied customers across Nigeria.</li>
+                </ul>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials-section info-section">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonials">
+                    <blockquote>
+                        <p>"Genkada Automobile restored my car to perfection! Their service is top-notch and affordable."</p>
+                        <footer>- Chinedu O., Lagos</footer>
+                    </blockquote>
+                    <blockquote>
+                        <p>"I bought my first car from Genkada and the experience was seamless. Highly recommended!"</p>
+                        <footer>- Aisha B., Abuja</footer>
+                    </blockquote>
+                    <blockquote>
+                        <p>"Their maintenance team is always available and reliable. My car has never run better."</p>
+                        <footer>- Samuel E., Port Harcourt</footer>
+                    </blockquote>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section info-section">
+                <h2>Frequently Asked Questions</h2>
+                <ul>
+                    <li><strong>Q:</strong> Do you offer home delivery for purchased cars?<br>
+                        <strong>A:</strong> Yes, we offer safe and secure home delivery nationwide.</li>
+                    <li><strong>Q:</strong> Can I book a service appointment online?<br>
+                        <strong>A:</strong> Absolutely! Use our contact form or call us to schedule your appointment.</li>
+                    <li><strong>Q:</strong> What payment methods do you accept?<br>
+                        <strong>A:</strong> We accept bank transfers, cards, and cash payments.</li>
+                    <li><strong>Q:</strong> Do you provide after-sales support?<br>
+                        <strong>A:</strong> Yes, our team is available for all your after-sales needs.</li>
+                </ul>
+            </section>
+
+            <div id="category-container"></div>
+            <!-- Contact Section (moved to last) -->
+            <section id="contact" class="contact-section">
+                <h2>Contact & Communication</h2>
+                <ul>
+                    <li><strong>Email:</strong> Larryomis2001@yahoo.com</li>
+                    <li><strong>Phone:</strong> 08028462823</li>
+                    <li><strong>Business Address:</strong> 30, Victoria Street</li>
+                    <li><strong>Office Hours:</strong> 9:00am – 5:00pm</li>
+                </ul>
+                <div class="social-media">
+                    <h3>Find us on Social Media</h3>
+                    <a href="https://wa.me/2348028462823" title="WhatsApp" target="_blank" rel="noopener"><img src="assets/whats.png" alt="WhatsApp" style="width:32px;"></a>
+                    <a href="https://www.facebook.com/marketplace/you/selling" title="Facebook" target="_blank" rel="noopener"><img src="assets/face.jpeg" alt="Facebook" style="width:32px;"></a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <button id="backToTopBtn" class="ba-top">Back To Top</button>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Genkada Automobile. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script/gen.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.getElementById('category-container');
+            if (container) {
+                fetch('partials/category.html')
+                .then(res => res.text())
+                .then(html => {
+                    container.innerHTML = html;
+                    setTimeout(() => {
+                    const section = container.querySelector(".category-section");
+                    if (section) section.classList.add("visible");
+                    }, 100);
+                })
+                .catch(error => {
+                    container.innerHTML = "<div style='color:red;'>❌ Error loading category section</div>";
+                    console.error("Category Load Error:", error);
+                });
+            }
+        });
+
+        const container = document.querySelector('.js-drop');
+        const more = document.querySelector('.more');
+        const dot = document.querySelector('.dot');
+        let checky = document.querySelector('.ck');
+        checky.checked = false;
+
+        function moreFunction() {
+            if (checky.checked) {
+               container.classList.add('ads');
+               more.innerHTML = "Exit";
+               dot.style.display="none";
+
+            } else {
+                more.innerHTML = "More . . .";
+                container.classList.remove('ads');
+            }
+        }
+
+        // Show/hide the button on scroll
+        window.addEventListener("scroll", () => {
+        const btn = document.getElementById("backToTopBtn");
+        if (window.scrollY > 200) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+        });
+
+        // Scroll to top when clicked
+        document.getElementById("backToTopBtn").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.querySelector('.skipping');
+            const closeBtn = document.querySelector('.skipping .ca');
+            let hideTimer;
+
+            // Show popup after 3 seconds
+            setTimeout(() => {
+                popup.style.display = 'block';
+                popup.style.opacity = '0';
+                popup.style.transition = 'opacity 0.5s ease';
+                requestAnimationFrame(() => {
+                    popup.style.opacity = '1';
+                });
+
+                // Auto-hide after 30 seconds
+                hideTimer = setTimeout(() => {
+                    hidePopup();
+                }, 30000);
+            }, 3000);
+
+            // Hide when clicking close button
+            closeBtn.addEventListener('click', hidePopup);
+
+            function hidePopup() {
+                popup.style.opacity = '0';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 500);
+                clearTimeout(hideTimer);
+            }
+        });
+    </script>
+</body>
+</html>

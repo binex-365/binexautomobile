@@ -1,0 +1,408 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #f3f3f3;
+  background: #232947 url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+/* Glowing moving overlay animation */
+@keyframes moveGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.glow-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    rgba(79, 140, 255, 0.15),
+    rgba(255, 255, 255, 0.05),
+    rgba(79, 140, 255, 0.15)
+  );
+  background-size: 600% 600%;
+  animation: moveGlow 20s ease infinite;
+  mix-blend-mode: screen;
+}
+
+.contact-section {
+  background-color: rgba(24, 32, 56, 0.92);
+  margin: 50px auto;
+  padding: 50px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px #4f8cff33;
+  z-index: 1;
+  position: relative;
+}
+
+.contact-section h2 {
+  text-align: center;
+  color: #4f8cff;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.contact-intro {
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: block;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  background: #1c2233;
+  color: #f3f3f3;
+  resize: none;
+  font-size: 15px;
+}
+
+.contact-form textarea {
+  height: 140px;
+}
+
+.contact-form button {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 200px;
+  align-self: center;
+  margin-top: 15px;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #397de8;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.form-group {
+  position: relative;
+  width: 100%;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 16px 16px 16px 12px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #1c2233;
+  color: #f3f3f3;
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-group textarea {
+  height: 140px;
+  resize: none;
+}
+
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  color: #aaa;
+  font-size: 14px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  background: #1c2233;
+  padding: 0 4px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #4f8cff;
+  outline: none;
+  box-shadow: 0 0 8px #4f8cff80;
+  background-color: transparent;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  background: #1c2233;
+  font-size: 12px;
+  color: #4f8cff;
+}
+
+.contact-form button {
+  background: linear-gradient(135deg, #4f8cff, #3a7be0);
+  color: #fff;
+  border: none;
+  padding: 14px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  width: fit-content;
+  align-self: center;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 15px rgba(79, 140, 255, 0.5);
+}
+
+.contact-form button:hover {
+  box-shadow: 0 6px 25px rgba(79, 140, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.contact-info {
+  margin-top: 60px;
+  line-height: 1.8;
+  background: rgba(28, 34, 51, 0.95);
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.contact-info h3 {
+  color: #4f8cff;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  background-color: #1c2233;
+  padding: 30px 10px;
+  font-size: 14px;
+  margin-top: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+
+  .contact-form button {
+    width: 100%;
+  }
+}
+
+/* Animation Styling */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate {
+  animation: fadeSlideUp 1s ease-out both;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.6s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.9s;
+}
+
+.animate-delay-4 {
+  animation-delay: 1.2s;
+}
+
+.rotating-glow-box {
+  position: fixed;
+  width: 160px;
+  height: 160px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 3;
+  animation:
+    moveAndRotateBox 20s linear infinite,
+    glowColorCycle 6s ease-in-out infinite;
+}
+
+/* Moving around screen + rotating */
+@keyframes moveAndRotateBox {
+  0% {
+    top: 0;
+    left: 0;
+    transform: rotate(0deg);
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 160px);
+    transform: rotate(90deg);
+  }
+  50% {
+    top: calc(100% - 160px);
+    left: calc(100% - 160px);
+    transform: rotate(180deg);
+  }
+  75% {
+    top: calc(100% - 160px);
+    left: 0;
+    transform: rotate(270deg);
+  }
+  100% {
+    top: 0;
+    left: 0;
+    transform: rotate(360deg);
+  }
+}
+
+/* Color changing glowing effect */
+@keyframes glowColorCycle {
+  0% {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.3);
+  }
+  25% {
+    background: rgba(0, 128, 255, 0.1);
+    border: 2px solid rgba(0, 128, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 128, 255, 0.4), 0 0 45px rgba(0, 128, 255, 0.3);
+  }
+  50% {
+    background: rgba(128, 0, 255, 0.1);
+    border: 2px solid rgba(128, 0, 255, 0.5);
+    box-shadow: 0 0 20px rgba(128, 0, 255, 0.4), 0 0 50px rgba(128, 0, 255, 0.3);
+  }
+  75% {
+    background: rgba(255, 0, 128, 0.1);
+    border: 2px solid rgba(255, 0, 128, 0.5);
+    box-shadow: 0 0 20px rgba(255, 0, 128, 0.4), 0 0 45px rgba(255, 0, 128, 0.3);
+  }
+  100% {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.3);
+  }
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #4f8cff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#form-status {
+  text-align: center;
+  font-weight: bold;
+}
+
+ .fade-message {
+  text-align: center;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.5s ease;
+}
+
+.fade-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.location-section {
+  background: #fff; /* Match body background */
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.location-section .container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.location-description {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.map-card {
+  width: 100%;
+  height: 450px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #040d35; /* fallback bg in case map doesn't load */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.map-card iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

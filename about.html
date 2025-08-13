@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - Genkada Automobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+  <!-- Main site styles -->
+  <link rel="stylesheet" href="styles/gen.css">
+  <link rel="stylesheet" href="styles/about.css">
+  <link rel="stylesheet" href="styles/RESPONSIVENESS/gen-response.css">
+  <style>
+    .category-section {
+      background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border-radius: 15px;
+      padding: 40px 20px;
+      margin: 50px auto;
+      max-width: 1000px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 132, 255, 0.3);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .category-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 25px;
+      text-shadow: 0 0 5px #00aaff;
+    }
+
+    .category-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .category-links a {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      padding: 18px 20px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .category-links a:hover {
+      background-color: rgba(0, 132, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px rgba(0, 132, 255, 0.3);
+    }
+
+    /************************* Sidy Dropdown **************************/
+    .dropdown-container {
+        border: 2px solid #377dff;
+        position: absolute;
+        top: 265px;
+        backdrop-filter: blur(18px);
+        width: 180px;
+        margin-left: -1.7rem;
+        border-radius: 5px;
+        box-shadow: 0 4px 7px black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-bottom: 0.6rem;
+        transform: translateY(1050px);
+        transition: all .5s;
+    }
+
+    .dropdown-container.ads {
+      transform: translateY(0);
+    }
+
+    .sidy .ck {
+      display: none;
+    }
+
+    /************************** Responsive Sidy *************************/
+
+    @media (min-width: 900px) and (max-width: 1244px) {
+       .social-icons {
+            display: flex;
+            position: fixed;
+            left: 60%;
+            top: 22px;
+        }
+
+      .sidy ul {
+        margin-top: 45px;
+      }
+
+      .cancel {
+        top: -9px;
+      }
+
+      .dropdown-container {
+        margin-top: -13px;
+      }
+    }
+
+    @media (max-width: 899px) {
+        .all {
+            margin-top: 8rem;
+        }
+    }
+
+    .act {
+        background: #4f8cff;
+        color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-container"></div>
+  <header class="main-header">
+    <div class="container nav-flex">
+        <a href="index.html" style="text-decoration: none;" class="logo">
+            <img src="assets/real-logo.png" class="log">
+            <div class="merge">
+                <h1>Genkada</h1><span>Automobile</span>
+            </div>
+        </a>
+        <nav>
+            <ul class="lnks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li class="dropdown">
+                    <a class="about-link" style="cursor: pointer;">More</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="vision.html">Vision</a></li>
+                        <li><a href="purpose.html">Purpose</a></li>
+                        <li><a href="goals.html">Goals</a></li>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="dropdown">
+                    <a class="about-link" style="cursor: pointer;">Categories</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="carsales.html">Car Sales</a></li>
+                        <li><a href="maintenance.html" style="white-space: nowrap;">General Maintenance</a></li>
+                        <li><a href="re-wiring.html">Re-wiring</a></li>
+                        <li><a href="parnel.html">Panel Beating</a></li>
+                        <li><a href="paint.html">Painting</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="https://wa.me/2348028462823" target="_blank" rel="noopener">
+                <img src="assets/wt.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.facebook.com/marketplace/you/selling" target="_blank" rel="noopener">
+                <img src="assets/face.jpeg" alt="Facebook">
+            </a>
+        </div>
+
+    </div>
+
+    <div class="ham-div">
+        <img src="assets/ham.png" class="ham">
+    </div>
+  </header>
+
+  <div class="sidy">
+    <input type="checkbox" id="check" class="ck" onclick="
+        moreFunction();
+    ">
+    <div class="cancel">&times;</div>
+    <ul>
+      <a href="about.html"><li class="act">About</li></a>
+      <a href="vision.html"><li>Vision</li></a>
+      <a href="purpose.html"><li>Purpose</li></a>
+      <a href="goals.html"><li>Goals</li></a>
+      <a href="mission.html"><li>Mission</li></a>
+      <a href="service.html"><li>Services</li></a>
+      <div class="dropdown-container js-drop">
+          <a href="contact.html"><li>Contact</li></a>
+          <a href="carsales.html"><li>Car Sales</li></a>
+          <a href="gallery.html"><li>Gallery</li></a>
+      </div>
+      <label for="check" style="font-size: 18px; border: none; text-shadow: 0px 1px 2px white; display: flex; justify-content: center; margin-top: 1.4rem; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.603); align-items: center; padding: 9px 15px; border-radius: 3px; backdrop-filter: blur(26px); position: relative;" id="more" onclick="moreFunction()"><span class="more">More <span class="dot">. . .</span></span></label>
+    </ul>
+  </div>
+
+  <main class="main-content all">
+        
+        <section class="about-hero">
+            <div class="about-hero-text">
+                <h2>Welcome to Genkada Automobile</h2>
+                <p>
+                    Your trusted partner for car sales, maintenance, and automotive solutions in Nigeria and Africa. We are dedicated to making car ownership joyful, affordable, and reliable for everyone.
+                </p>
+            </div>
+            <div class="about-hero-img">
+                <img src="assets/trusts.webp" alt="Genkada Team">
+            </div>
+        </section>
+        <div id="category-container"></div>
+        <section class="info-section">
+            <h2>Who We Are</h2>
+            <p>
+                <strong>Genkada Automobile</strong> is a forward-thinking automotive company based in Nigeria, committed to transforming the way people buy, sell, and maintain vehicles. Our platform connects buyers, sellers, and service providers, ensuring transparency, trust, and satisfaction at every step.
+            </p>
+            <ul>
+                <li>Registered and trusted in the Nigerian automotive industry.</li>
+                <li>Experienced team of professionals, mechanics, and customer care agents.</li>
+                <li>Wide network of partners and verified dealers across the country.</li>
+                <li>Modern digital platform for seamless transactions and support.</li>
+            </ul>
+        </section>
+
+        <section class="info-section info-img-right">
+            <div class="info-img">
+                <img src="assets/cs.avif" alt="Showroom">
+            </div>
+            <div>
+                <h2>What We Offer</h2>
+                <ul>
+                    <li><strong>Car Sales:</strong> New and used cars, SUVs, and trucks from trusted sources.</li>
+                    <li><strong>Maintenance & Repairs:</strong> Certified workshops and mobile mechanics for all brands.</li>
+                    <li><strong>Car Inspection:</strong> Pre-purchase and routine inspection services for peace of mind.</li>
+                    <li><strong>Financing & Insurance:</strong> Flexible payment plans and insurance options.</li>
+                    <li><strong>Trade-In & Upgrade:</strong> Swap your old car for a better one easily.</li>
+                    <li><strong>Roadside Assistance:</strong> Emergency help when you need it most.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Why Choose Genkada Automobile?</h2>
+            <ul>
+                <li><strong>Trust & Transparency:</strong> Every transaction is open, honest, and secure.</li>
+                <li><strong>Customer-Centric:</strong> We put your needs first, always.</li>
+                <li><strong>Innovation:</strong> We use technology to make your experience better and easier.</li>
+                <li><strong>Community Impact:</strong> We support local jobs, skills, and social initiatives.</li>
+                <li><strong>Affordable Solutions:</strong> Quality cars and services at prices you can trust.</li>
+            </ul>
+        </section>
+
+        <section class="info-section info-img-left">
+            <div>
+                <h2>Meet Our Team</h2>
+                <p>
+                    Our passionate team includes automotive experts, engineers, digital innovators, and customer care professionals. We are united by a shared vision: to make car ownership and mobility better for everyone.
+                </p>
+            </div>
+            <div class="info-img">
+                <img src="assets/team.avif" alt="Our Team">
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>More About Us</h2>
+            <ul>
+                <li>We partner with NGOs and government agencies to promote road safety and driver education.</li>
+                <li>We are committed to environmental sustainability by encouraging eco-friendly vehicles and practices.</li>
+                <li>We organize community events, car clinics, and free vehicle checks.</li>
+                <li>We provide resources and advice for first-time car buyers and young drivers.</li>
+                <li>We are always evolving—your feedback helps us grow!</li>
+            </ul>
+        </section>
+
+        <section class="info-section info-img-right">
+            <div class="info-img">
+                <img src="assets/awa.webp" alt="Award Winning Service">
+            </div>
+            <div>
+                <h2>Award-Winning Service</h2>
+                <p>
+                    Genkada Automobile has been recognized as one of the most innovative and customer-focused automotive companies in Nigeria. Our dedication to excellence has earned us several industry awards for outstanding service, digital transformation, and community impact.
+                </p>
+                <ul>
+                    <li>2024 Nigerian AutoTech Excellence Award</li>
+                    <li>Best Customer Support – Lagos Auto Expo</li>
+                    <li>Top 10 Most Trusted Car Dealers in West Africa</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section info-img-left">
+            <div>
+                <h2>Our Technology Edge</h2>
+                <p>
+                    We leverage the latest technology to make your automotive journey seamless. From AI-powered car recommendations to secure online transactions and real-time service tracking, Genkada Automobile is at the forefront of digital innovation in the auto industry.
+                </p>
+                <ul>
+                    <li>24/7 online support and live chat</li>
+                    <li>Mobile app for easy access to all services</li>
+                    <li>Secure payment gateways and instant notifications</li>
+                    <li>Virtual car tours and video consultations</li>
+                </ul>
+            </div>
+            <div class="info-img">
+                <img src="assets/tec.avif" alt="Technology Dashboard">
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>What Our Customers Say</h2>
+            <ul>
+                <li>
+                    <em>"Genkada made buying my first car so easy and stress-free. Their team is truly amazing!"</em>
+                    <br><span style="color:#4f8cff;">– Ada, Abuja</span>
+                </li>
+                <li>
+                    <em>"I love the transparency and honesty. I always recommend Genkada to my friends."</em>
+                    <br><span style="color:#4f8cff;">– Chinedu, Lagos</span>
+                </li>
+                <li>
+                    <em>"Their after-sales support is top-notch. I feel safe and valued as a customer."</em>
+                    <br><span style="color:#4f8cff;">– Fatima, Port Harcourt</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="info-section">
+            <h2>Our Partners & Affiliations</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center;">
+                <div style="flex:1 1 220px; min-width:180px;">
+                    <img src="assets/ptt.avif" alt="Partner 1" style="width:100%; max-width:120px; border-radius:10px; background:#fff; padding:8px;">
+                </div>
+                <div style="flex:1 1 220px; min-width:180px;">
+                    <img src="assets/afr.webp" alt="Partner 2" style="width:100%; max-width:120px; border-radius:10px; background:#fff; padding:8px;">
+                </div>
+                <div style="flex:1 1 220px; min-width:180px;">
+                    <img src="assets/trt.webp" alt="Partner 3" style="width:100%; max-width:120px; border-radius:10px; background:#fff; padding:8px;">
+                </div>
+                <div style="flex:2 1 340px;">
+                    <ul>
+                        <li>Official partner of <strong>Nigerian Auto Dealers Association</strong></li>
+                        <li>Affiliated with <strong>National Road Safety Corps</strong></li>
+                        <li>Collaborations with top banks and insurance companies</li>
+                        <li>Member of <strong>Africa Mobility Network</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Contact & Connect</h2>
+            <p>
+                Ready to experience the Genkada difference? <br>
+                <a href="contact.html" class="contact-link">Contact us</a> or visit our <a href="carsales.html" class="contact-link">showroom today!</a>
+            </p>
+        </section>
+    </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Genkada Automobile. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script/about.js"></script>
+  <!-- Category section loader + animation -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById('category-container');
+      if (container) {
+        fetch('partials/category.html')
+          .then(res => res.text())
+          .then(html => {
+            container.innerHTML = html;
+            setTimeout(() => {
+              const section = container.querySelector(".category-section");
+              if (section) section.classList.add("visible");
+            }, 100);
+          })
+          .catch(error => {
+            container.innerHTML = "<div style='color:red;'>❌ Error loading category section</div>";
+            console.error("Category Load Error:", error);
+          });
+      }
+    });
+    
+    const container = document.querySelector('.js-drop');
+    const more = document.querySelector('.more');
+    const dot = document.querySelector('.dot');
+    let checky = document.querySelector('.ck');
+    checky.checked = false;
+
+    function moreFunction() {
+        if (checky.checked) {
+            container.classList.add('ads');
+            more.innerHTML = "Exit";
+            dot.style.display="none";
+
+        } else {
+            more.innerHTML = "More . . .";
+            container.classList.remove('ads');
+        }
+    }
+  </script>
+</body>
+</html>

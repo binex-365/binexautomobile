@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Car Sales - Genkada Automobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/gen.css" />
+  <link rel="stylesheet" href="styles/carsales.css" />
+  <link rel="stylesheet" href="styles/RESPONSIVENESS/gen-response.css">
+  <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .car-item {
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .car-item:hover {
+      transform: scale(1.03);
+    }
+
+    .car-item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .car-item a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .car-item a:hover {
+      background: #1d4ed8;
+    }
+
+    .no-result {
+      text-align: center;
+      padding: 40px;
+      color: white;
+    }
+
+    .no-result button {
+      background: #1f2937;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .no-result button:hover {
+      background: #111827;
+    }
+
+    .dropdown-container {
+      border: 2px solid #377dff;
+      position: absolute;
+      top: 240px;
+      backdrop-filter: blur(18px);
+      width: 180px;
+      margin-left: -1.7rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 7px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding-bottom: 0.6rem;
+      transform: translateY(1050px);
+      transition: all .5s;
+    }
+
+    .dropdown-container.ads {
+      transform: translateY(0);
+    }
+
+    .sidy .ck {
+      display: none;
+    }
+
+    /************************** Responsive Sidy *************************/
+
+    @media (min-width: 900px) and (max-width: 1244px) {
+       .social-icons {
+            display: flex;
+            position: fixed;
+            left: 60%;
+            top: 22px;
+        }
+
+      .sidy ul {
+        margin-top: 20px;
+      }
+
+      .cancel {
+        top: -9px;
+      }
+
+      .dropdown-container {
+        margin-top: -13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-container"></div>
+  <header class="main-header">
+    <div class="container nav-flex">
+      <a href="index.html" style="text-decoration: none;" class="logo">
+        <img src="assets/real-logo.png" class="log">
+        <div class="merge">
+          <h1>Genkada</h1><span>Automobile</span>
+        </div>
+      </a>
+      <nav>
+        <ul class="lnks">
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown">
+            <a class="about-link" style="cursor: pointer;">More</a>
+            <ul class="dropdown-menu">
+                <li><a href="vision.html">Vision</a></li>
+                <li><a href="purpose.html">Purpose</a></li>
+                <li><a href="goals.html">Goals</a></li>
+                <li><a href="mission.html">Mission</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+          </li>
+          <li><a href="carsales.html" class="active">Car Sales</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a class="about-link" style="cursor: pointer;">Categories</a>
+            <ul class="dropdown-menu">
+                <li><a href="maintenance.html" style="white-space: nowrap;">General Maintenance</a></li>
+                <li><a href="re-wiring.html">Re-wiring</a></li>
+                <li><a href="parnel.html">Panel Beating</a></li>
+                <li><a href="paint.html">Painting</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+        <div class="social-icons">
+            <a href="https://wa.me/2348028462823" target="_blank" rel="noopener">
+                <img src="assets/wt.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.facebook.com/marketplace/you/selling" target="_blank" rel="noopener">
+                <img src="assets/face.jpeg" alt="Facebook">
+            </a>
+        </div>
+
+    </div>
+
+    <div class="ham-div">
+        <img src="assets/ham.png" class="ham">
+    </div>
+  </header>
+
+  <div class="sidy">
+    <input type="checkbox" id="check" class="ck" onclick="
+        moreFunction();
+    ">
+    <div class="cancel">&times;</div>
+    <ul>
+      <a href="about.html"><li>About</li></a>
+      <a href="vision.html"><li>Vision</li></a>
+      <a href="purpose.html"><li>Purpose</li></a>
+      <a href="goals.html"><li>Goals</li></a>
+      <a href="carsales.html"><li class="act">Car Sales</li></a>
+      
+      <a href="service.html"><li>Services</li></a>
+      <div class="dropdown-container js-drop">
+          <a href="mission.html"><li>Mission</li></a>
+          <a href="contact.html"><li>Contact</li></a>
+          <a href="gallery.html"><li>Gallery</li></a>
+      </div>
+      <label for="check" style="font-size: 18px; border: none; text-shadow: 0px 1px 2px white; display: flex; justify-content: center; margin-top: 1.4rem; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.603); align-items: center; padding: 9px 15px; border-radius: 3px; backdrop-filter: blur(26px); position: relative;" id="more" onclick="moreFunction()"><span class="more">More <span class="dot">. . .</span></span></label>
+    </ul>
+  </div>
+  <div class="all">
+    <div class="hero-overlay"></div>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Explore Our Luxury Car Collection</h1>
+        <p>Find your perfect ride today from our top-quality selections.</p>
+        <div class="hero-buttons">
+          <button class="buy-btn">Buy Now</button>
+          <button class="request-btn">Request Purchase</button>
+        </div><h3>Loading ...</h3>
+      </div>
+    </section>
+    <section class="car-listings" id="carContainer">
+    </section>
+
+    <!-- <div id="seeMoreBtn" style="display: none;"></div>
+    <div id="goBackBtn" style="display: none;"></div> -->
+    
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Genkada Automobile. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script/carsales.js"></script>
+  <script>
+    const container = document.querySelector('.js-drop');
+    const more = document.querySelector('.more');
+    const dot = document.querySelector('.dot');
+    let checky = document.querySelector('.ck');
+    checky.checked = false;
+
+    function moreFunction() {
+      if (checky.checked) {
+        container.classList.add('ads');
+        more.innerHTML = "Exit";
+        dot.style.display="none";
+
+      } else {
+        more.innerHTML = "More . . .";
+        container.classList.remove('ads');
+      }
+    }
+  </script>
+</body>
+</html>

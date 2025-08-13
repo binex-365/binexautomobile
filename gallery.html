@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genkada Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='styles/gen.css'>
+  <link rel='stylesheet' href='styles/RESPONSIVENESS/gen-response.css'>
+  <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+  <style>
+    :root {
+      --primary-color: #00eaff;
+      --bg-dark: #0f111a;
+      --bg-glow: rgba(0, 255, 255, 0.06);
+      --text-color: #e0f7ff;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      overscroll-behavior: none;
+      scroll-behavior: smooth;
+      background-color: #000;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at bottom, #0f2027 0%, #203a43 50%, #000000 100%);
+      background-size: 400% 400%;
+      animation: stormyGlow 25s ease infinite;
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    @keyframes stormyGlow {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+    .heady {
+      padding: 120px 20px 80px;
+      text-align: center;
+      background: linear-gradient(to right, rgba(0,0,20,0.85), rgba(0,78,146,0.85));
+      box-shadow: 0 0 40px var(--primary-color);
+      animation: fadeInDown 1.2s ease both;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .heady h1 {
+      font-size: 3rem;
+      color: var(--primary-color);
+      text-shadow: 0 0 20px var(--primary-color);
+    }
+    .heady p {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      color: #cce7ff;
+    }
+    .gallery-section {
+      padding: 80px 30px 60px;
+      max-width: 1500px;
+      margin: auto;
+      animation: fadeInUp 1.5s ease both;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 35px;
+      padding-left: 20px;
+      border-left: 6px solid var(--primary-color);
+      color: var(--primary-color);
+      text-shadow: 0 0 12px rgba(0,255,255,0.4);
+      animation: glowPulse 2s infinite ease-in-out;
+    }
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 10px rgba(0,255,255,0.2); }
+      50% { text-shadow: 0 0 20px rgba(0,255,255,0.6); }
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .gallery-item {
+      background: var(--bg-dark);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 25px var(--bg-glow);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gallery-item::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 80%);
+      animation: pulseLight 6s infinite linear;
+      z-index: 0;
+    }
+    @keyframes pulseLight {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #000428;
+      color: #cce7ff;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      .heady h1 {
+        font-size: 2.2rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .sidy ul {
+      list-style-type: none;
+      margin-top: 3rem;
+    }
+
+    .cancel {
+      margin-top: 0.5rem;
+    }
+
+    .dropdown-container {
+      border: 2px solid #377dff;
+      position: absolute;
+      top: 313px;
+      backdrop-filter: blur(18px);
+      width: 180px;
+      margin-left: -1.7rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 7px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding-bottom: 0.6rem;
+      transform: translateY(1050px);
+      transition: all .5s;
+  }
+
+  .dropdown-container.ads {
+      transform: translateY(0);
+  }
+
+  .sidy .ck {
+      display: none;
+  }
+
+  .act {
+    background-color: #4f8cff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 18px #1d2647;  
+  }
+
+
+  .category-section {
+      background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border-radius: 15px;
+      padding: 40px 20px;
+      margin: 50px auto;
+      max-width: 1000px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 132, 255, 0.3);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .category-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 25px;
+      text-shadow: 0 0 5px #00aaff;
+    }
+
+    .category-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .category-links a {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      padding: 18px 20px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .category-links a:hover {
+      background-color: rgba(0, 132, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px rgba(0, 132, 255, 0.3);
+    }
+
+    /************************* Sidy Dropdown **************************/
+    .dropdown-container {
+      border: 2px solid #377dff;
+      position: absolute;
+      top: 230px;
+      backdrop-filter: blur(18px);
+      width: 180px;
+      margin-left: -1.7rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 7px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding-bottom: 0.6rem;
+      transform: translateY(1050px);
+      transition: all .5s;
+    }
+
+    .dropdown-container.ads {
+      transform: translateY(0);
+    }
+
+    .sidy .ck {
+      display: none;
+    }
+
+    /************************** Responsive Sidy *************************/
+
+    @media (min-width: 900px) and (max-width: 1244px) {
+       .social-icons {
+            display: flex;
+            position: fixed;
+            left: 60%;
+            top: 22px;
+        }
+
+      .sidy ul {
+        margin-top: 20px;
+      }
+
+      .cancel {
+        top: -9px;
+      }
+
+      .dropdown-container {
+        margin-top: -13px;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const galleryItems = document.querySelectorAll(".gallery-item");
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      galleryItems.forEach(item => {
+        observer.observe(item);
+      });
+    });
+  </script>
+</head>
+<body>
+   <header class="main-header">
+    <div class="container nav-flex">
+        <a href="index.html" style="text-decoration: none;" class="logo">
+            <img src="assets/real-logo.png" class="log">
+            <div class="merge">
+                <h1>Genkada</h1><span>Automobile</span>
+            </div>
+        </a>
+        <nav>
+            <ul class="lnks">
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a class="about-link" style="cursor: pointer;">More</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="vision.html">Vision</a></li>
+                        <li><a href="purpose.html">Purpose</a></li>
+                        <li><a href="goals.html">Goals</a></li>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="service.html">Services</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="contact.html">Contact</a></li> 
+                <li><a href="gallery.html" class='active'>Gallery</a></li>
+                <li class="dropdown">
+                  <a class="about-link" style="cursor: pointer;">Categories</a>
+                  <ul class="dropdown-menu">
+                      <li><a href="carsales.html">Car Sales</a></li>
+                      <li><a href="maintenance.html" style="white-space: nowrap;">General Maintenance</a></li>
+                      <li><a href="re-wiring.html">Re-wiring</a></li>
+                      <li><a href="parnel.html">Panel Beating</a></li>
+                      <li><a href="paint.html">Painting</a></li>
+                  </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="https://wa.me/2348028462823" target="_blank" rel="noopener">
+                <img src="assets/wt.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.facebook.com/marketplace/you/selling" target="_blank" rel="noopener">
+                <img src="assets/face.jpeg" alt="Facebook">
+            </a>
+        </div>
+
+    </div>
+
+    <div class="ham-div">
+        <img src="assets/ham.png" class="ham">
+    </div>
+  </header>
+
+    <div class="sidy">
+        <input type="checkbox" id="check" class="ck" onclick="
+            moreFunction();
+        ">
+        <div class="cancel">&times;</div>
+        <ul>
+            <a href="about.html"><li>About</li></a>
+            <a href="vision.html"><li>Vision</li></a>
+            <a href="purpose.html"><li>Purpose</li></a>
+            <a href="goals.html"><li>Goals</li></a>
+            <a href="mission.html"><li>Mission</li></a>
+            <a href="gallery.html"><li class='act'>Gallery</li></a>
+            <div class="dropdown-container js-drop"> 
+                <a href="service.html"><li>Service</li></a>
+                <a href="carsales.html"><li>Car Sales</li></a>
+                <a href="contact.html"><li>Contact</li></a>
+               
+            </div>
+            <label for="check" style="font-size: 18px; border: none; text-shadow: 0px 1px 2px white; display: flex; justify-content: center; margin-top: 1.4rem; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.603); align-items: center; padding: 9px 15px; border-radius: 3px; backdrop-filter: blur(26px); position: relative;" id="more" onclick="moreFunction()"><span class="more">More <span class="dot">. . .</span></span></label>
+        </ul>
+    </div>
+
+    <div class='all'>
+       <section class='heady'>
+    <h1>Genkada Gallery</h1>
+    <p>Experience the beauty of our finest cars and services in full display</p>
+  </section>
+
+  <section class="gallery-section">
+    <h2 class="section-title">Featured Vehicles</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="assets/bf.jpeg" alt="Featured Car" style='height:250px;'></div>
+      <div class="gallery-item"><img src="assets/acc.jpeg" alt="Featured Car"></div>
+      <div class="gallery-item"><img src="assets/cam.jpeg" alt="Featured Car" style='height:250px;'></div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2 class="section-title">Before & After Repairs</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="assets/damaged1.jpeg"></div>
+      <div class="gallery-item"><img src="assets/new1.jpg"></div>
+      <div class="gallery-item"><img src="assets/destory3.jpg"></div>
+      <div class="gallery-item"><img src="assets/real nw.jpg">  </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2 class="section-title">Sold Cars Showcase</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="New cars/camry-main.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/ford-main.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/venza-main.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/pilot-main.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/camry-back.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/ford-side.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/pilot-side.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/corol-side.webp" alt="Sold Car"></div>      
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2 class="section-title">Explore More</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="Genkada Images/charger.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag 2.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag 3.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag 4.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag 9.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag pics.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag5.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag6.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/diag8.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/Fuel injector testing.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/mech 1.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/mech3.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/oil filter clogged.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/parts 1.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/parts 2.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/Transmission 1.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="Genkada Images/Transmission 2.jpg" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/camry-engine.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/benz-engine.webp" alt="Sold Car"></div>
+      <div class="gallery-item"><img src="New cars/ford_engine.webp" alt="Sold Car"></div>
+    </div>
+  </section>
+
+   <div id="category-container"></div>
+
+      <footer style="background: linear-gradient(90deg, #1a1e2e 0%, #0b3279 100%);
+        color: #fff;
+        text-align: center;
+        padding: 22px 0 12px 0;
+        margin-top: 48px;
+        border-top: 1px solid #00aeffb2;
+        font-size: 1.08rem;
+        letter-spacing: 1px;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 -2px 16px #0005;">
+        <div class="container">
+          <p>&copy; 2025 Genkada Automobile. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+  <script>
+    const sidy = document.querySelector('.sidy');
+    const content = document.querySelector('.all');
+    const ham = document.querySelector('.ham-div');
+    const cancel = document.querySelector('.cancel');
+    const body = document.querySelector('body');
+
+    ham.addEventListener('click', () => {
+        content.classList.add('active');
+        sidy.classList.add('active');
+        content.style.pointerEvents="none";
+        content.classList.add('opaci');
+        body.style.overflowX='hidden';
+        body.style.overflowY='hidden';
+    });
+
+    cancel.addEventListener('click', () => {
+        content.classList.remove('active');
+        sidy.classList.remove('active');
+        content.style.pointerEvents="all";
+        content.classList.remove('opaci');
+        body.style.overflowX='hidden';
+        body.style.overflowY='scroll';
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById('category-container');
+      if (container) {
+        fetch('partials/category.html')
+          .then(res => res.text())
+          .then(html => {
+            container.innerHTML = html;
+            setTimeout(() => {
+              const section = container.querySelector(".category-section");
+              if (section) section.classList.add("visible");
+            }, 100);
+          })
+          .catch(error => {
+            container.innerHTML = "<div style='color:red;'>❌ Error loading category section</div>";
+            console.error("Category Load Error:", error);
+          });
+      }
+    });
+
+    const container = document.querySelector('.js-drop');
+    const more = document.querySelector('.more');
+    const dot = document.querySelector('.dot');
+    let checky = document.querySelector('.ck');
+    checky.checked = false;
+
+    function moreFunction() {
+        if (checky.checked) {
+            container.classList.add('ads');
+            more.innerHTML = "Exit";
+            dot.style.display="none";
+
+        } else {
+            more.innerHTML = "More . . .";
+            container.classList.remove('ads');
+        }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+body {
+    background: #232947 url('../assets/nig.avif') no-repeat center center fixed;
+    background-size: cover;
+    color: #f3f3f3;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding-bottom: 80px; /* Prevent content from hiding behind footer */
+}
+
+.main-content {
+    width: 95%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 0 32px 0;
+    margin-top: 90px; /* Give space for fixed header */
+}
+
+.info-section {
+    background: rgba(24,32,56,0.93);
+    margin: 38px 0;
+    padding: 38px 28px 24px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px #4f8cff33, 0 2px 8px #23293322;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s, transform 1s;
+    border-left: 7px solid #4f8cff;
+    animation: fadeInSection 1.1s cubic-bezier(.4,0,.2,1);
+    backdrop-filter: blur(2px) brightness(1.08);
+    -webkit-backdrop-filter: blur(2px) brightness(1.08);
+}
+
+body.loaded .info-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInSection {
+    from { opacity: 0; transform: translateY(40px);}
+    to   { opacity: 1; transform: translateY(0);}
+}
+
+.info-section h2 {
+    color: #4f8cff;
+    margin-bottom: 17px;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px #4f8cff11;
+}
+
+.info-section ul {
+    margin-left: 22px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.info-section ul li {
+    color: #f3f3f3;
+    margin-bottom: 12px;
+    font-size: 1.13rem;
+    line-height: 1.7;
+    padding-left: 28px;
+    position: relative;
+}
+
+.info-section ul li::before {
+    content: "✔";
+    color: #4f8cff;
+    font-size: 1.1em;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+/* --- Footer Styling --- */
+footer {
+    background: rgba(24,32,56,0.97);
+    color: #f3f3f3;
+    padding: 28px 0 18px 0;
+    text-align: center;
+    font-size: 1.03rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 -2px 16px #0005;
+    border-top: 2px solid #4f8cff;
+    margin: 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+}
+
+footer .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2vw;
+}
+
+footer p {
+    margin: 0;
+    color: #bcd0f7;
+    font-size: 1.01rem;
+    letter-spacing: 0.2px;
+}
+
+.floating-container {
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #4f8cffcc 0%, #4f8cff77 60%, #23293300 100%);
+    pointer-events: none;
+    z-index: 2;
+    animation: floatAroundFull 18s linear infinite;
+    opacity: 0.55;
+    box-shadow: 0 0 60px 30px #4f8cff55;
+    transition: opacity 0.5s;
+}
+
+@keyframes floatAroundFull {
+    0%   { top: 10%; left: 5%;    transform: scale(1);}
+    15%  { top: 10%; left: 80%;   transform: scale(1.1);}
+    30%  { top: 70%; left: 80%;   transform: scale(0.95);}
+    45%  { top: 70%; left: 10%;   transform: scale(1.08);}
+    60%  { top: 40%; left: 50%;   transform: scale(1);}
+    75%  { top: 80%; left: 40%;   transform: scale(1.12);}
+    90%  { top: 15%; left: 60%;   transform: scale(0.98);}
+    100% { top: 10%; left: 5%;    transform: scale(1);}
+}

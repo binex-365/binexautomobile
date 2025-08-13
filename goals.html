@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Goals - Genkada Automobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main site styles -->
+     <link rel="stylesheet" href="styles/gen.css">
+    <link rel="stylesheet" href="styles/goal.css">
+    <link rel="stylesheet" href="styles/RESPONSIVENESS/gen-response.css">
+    <link rel="icon" href="assets/real-logo.png" style="width: 80px; height: 80px;">
+    <style>
+        .main-header {
+            z-index: 50000;
+            position: fixed;
+        }
+
+         @media (max-width: 600px) {
+
+            .social-icons {
+                display: flex;
+                position: fixed;
+                top: 15px;
+                left: 50%;
+            }
+        }
+
+        .category-section {
+      background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border-radius: 15px;
+      padding: 40px 20px;
+      margin: 50px auto;
+      max-width: 1000px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 132, 255, 0.3);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .category-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 25px;
+      text-shadow: 0 0 5px #00aaff;
+    }
+
+    .category-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .category-links a {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      padding: 18px 20px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .category-links a:hover {
+      background-color: rgba(0, 132, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px rgba(0, 132, 255, 0.3);
+    }
+
+        /************************* Sidy Dropdown **************************/
+        .dropdown-container {
+            border: 2px solid #377dff;
+            position: absolute;
+            top: 250px;
+            backdrop-filter: blur(18px);
+            width: 180px;
+            margin-left: -1.9rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 7px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding-bottom: 0.6rem;
+            transform: translateY(1050px);
+            transition: all .5s;
+        }
+
+        .dropdown-container.ads {
+           transform: translateY(0);
+        }
+
+        .sidy .ck {
+             display: none;
+        }
+
+        .cancel {
+            top: -2px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidy ul {
+            list-style-type: none;
+            margin-top: 2rem;
+            margin-left: 0.5rem;
+        }
+
+        /************************** Responsive Sidy *************************/
+
+        @media (min-width: 900px) and (max-width: 1244px) {
+            .social-icons {
+                display: flex;
+                position: fixed;
+                left: 60%;
+                top: 22px;
+            }
+
+            .dropdown-container {
+                margin-top: -13px;
+            }
+
+            .ham-div {
+                margin-right: 2rem;
+            }
+        }
+
+        .act {
+            background-color: #4f8cff;
+            border-radius: 5px;
+            box-shadow: 0px 2px 18px #1d2647;  
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-container"></div>
+
+    <header class="main-header">
+        <div class="container nav-flex">
+            <a href="index.html" style="text-decoration: none;" class="logo">
+                <img src="assets/real-logo.png" class="log">
+                <div class="merge">
+                    <h1>Genkada</h1><span>Automobile</span>
+                </div>
+            </a>
+            <nav>
+                <ul class="lnks">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="goals.html" class="active">Goals</a></li>
+                    <li class="dropdown">
+                        <a class="about-link" style="cursor: pointer;">More</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="vision.html">Vision</a></li>
+                            <li><a href="purpose.html">Purpose</a></li>
+                            <li><a href="mission.html">Mission</a></li>
+                            <li><a href="service.html">Services</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="dropdown">
+                        <a class="about-link" style="cursor: pointer;">Categories</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="carsales.html">Car Sales</a></li>
+                            <li><a href="maintenance.html" style="white-space: nowrap;">General Maintenance</a></li>
+                            <li><a href="re-wiring.html">Re-wiring</a></li>
+                            <li><a href="parnel.html">Panel Beating</a></li>
+                            <li><a href="paint.html">Painting</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://wa.me/2348028462823" target="_blank" rel="noopener">
+                    <img src="assets/wt.png" alt="WhatsApp">
+                </a>
+                <a href="https://www.facebook.com/marketplace/you/selling" target="_blank" rel="noopener">
+                    <img src="assets/face.jpeg" alt="Facebook">
+                </a>
+            </div>
+
+        </div>
+
+        <div class="ham-div">
+            <img src="assets/ham.png" class="ham">
+        </div>
+    </header>
+
+    <div class="sidy">
+        <input type="checkbox" id="check" class="ck" onclick="
+            moreFunction();
+        ">
+        <div class="cancel">&times;</div>
+        <ul>
+        <a href="about.html"><li>About</li></a>
+        <a href="vision.html"><li>Vision</li></a>
+        <a href="purpose.html"><li>Purpose</li></a>
+        <a href="goals.html"><li class="act">Goals</li></a>
+        <a href="mission.html"><li>Mission</li></a>
+        <a href="service.html"><li>Services</li></a>
+        <div class="dropdown-container js-drop">
+            <a href="contact.html"><li>Contact</li></a>
+            <a href="carsales.html"><li>Car Sales</li></a>
+            <a href="gallery.html"><li>Gallery</li></a>
+        </div>
+        <label for="check" style="font-size: 18px; border: none; text-shadow: 0px 1px 2px white; display: flex; justify-content: center; margin-top: 1.4rem; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.603); align-items: center; padding: 9px 15px; border-radius: 3px; backdrop-filter: blur(26px); position: relative;" id="more" onclick="moreFunction()"><span class="more">More <span class="dot">. . .</span></span></label>
+        </ul>
+    </div>
+
+    <main class="main-content all">
+        <section class="info-section">
+            <h2>Our Goals</h2>
+            <p>
+                At <strong>Genkada Automobile</strong>, our goals are the stepping stones that drive us toward our vision and purpose. We are committed to delivering value, trust, and innovation to every customer and community we serve.
+            </p>
+            <ul>
+                <li>To provide a seamless, transparent, and secure platform for buying and selling vehicles in Nigeria and Africa.</li>
+                <li>To ensure every customer enjoys a hassle-free experience, from search to purchase and after-sales support.</li>
+                <li>To offer a wide range of high-quality, affordable vehicles and automotive services tailored to local needs.</li>
+                <li>To empower our staff and partners with training, technology, and opportunities for growth.</li>
+                <li>To set the standard for integrity, reliability, and customer satisfaction in the automobile industry.</li>
+                <li>To support local communities through job creation, skills development, and social responsibility initiatives.</li>
+                <li>To promote road safety, automotive education, and responsible vehicle ownership.</li>
+                <li>To embrace innovation and digital transformation for smarter, more efficient mobility solutions.</li>
+                <li>To foster long-term relationships with customers, partners, and stakeholders built on trust and mutual respect.</li>
+            </ul>
+        </section>
+
+        <section class="info-section">
+            <h2>How We Achieve Our Goals</h2>
+            <ul>
+                <li><strong>Customer Focus:</strong> Listening to our customers and adapting our services to meet their evolving needs.</li>
+                <li><strong>Continuous Improvement:</strong> Investing in technology, training, and process optimization.</li>
+                <li><strong>Community Engagement:</strong> Partnering with local organizations and supporting impactful initiatives.</li>
+                <li><strong>Transparency:</strong> Ensuring honesty and openness in every transaction and communication.</li>
+                <li><strong>Innovation:</strong> Leveraging digital tools and creative thinking to stay ahead in the industry.</li>
+            </ul>
+        </section>
+
+        <section class="info-section">
+            <h2>Our Commitment</h2>
+            <p>
+                Genkada Automobile is dedicated to achieving these goals with passion, professionalism, and a relentless drive for excellence. We believe that by staying true to our goals, we can make a lasting difference in the lives of our customers and the future of mobility in Africa.
+            </p>
+        </section>
+
+        <div id="category-container"></div>
+    </main>
+
+    <footer>
+        
+        <div class="container">
+            <p>&copy; 2025 Genkada Automobile. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="script/goal.js"></script>
+    <script>
+        // Fade-in animation for info sections
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.body.classList.add('loaded');
+            }, 100);
+        });
+
+         document.addEventListener("DOMContentLoaded", function () {
+            const container = document.getElementById('category-container');
+            if (container) {
+                fetch('partials/category.html')
+                .then(res => res.text())
+                .then(html => {
+                    container.innerHTML = html;
+                    setTimeout(() => {
+                    const section = container.querySelector(".category-section");
+                    if (section) section.classList.add("visible");
+                    }, 100);
+                })
+                .catch(error => {
+                    container.innerHTML = "<div style='color:red;'>❌ Error loading category section</div>";
+                    console.error("Category Load Error:", error);
+                });
+            }
+        });
+
+        const container = document.querySelector('.js-drop');
+        const more = document.querySelector('.more');
+        const dot = document.querySelector('.dot');
+        let checky = document.querySelector('.ck');
+        checky.checked = false;
+
+        function moreFunction() {
+            if (checky.checked) {
+                container.classList.add('ads');
+                more.innerHTML = "Exit";
+                dot.style.display="none";
+
+            } else {
+                more.innerHTML = "More . . .";
+                container.classList.remove('ads');
+            }
+        }
+    </script>
+</body>
+</html>
